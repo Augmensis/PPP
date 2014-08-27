@@ -42,6 +42,7 @@
     <Compile Include="Management\Account.cs" />
     <Compile Include="Management\Buyer.cs" />
     <Compile Include="Management\Chain.cs" />
+    <Compile Include="Management\Content.cs" />
     <Compile Include="Management\Seller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

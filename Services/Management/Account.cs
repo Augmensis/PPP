@@ -8,5 +8,9 @@ namespace Services.Management
 {
     class Account
     {
+        protected string Username;
+        protected string PasswordHash;
+        protected string CreatedOn;
+
     }
 }

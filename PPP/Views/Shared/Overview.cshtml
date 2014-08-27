@@ -1,0 +1,27 @@
+﻿@using Services.Management
+@{
+    var data = (Services.Management.Content.Overview)ViewData["Content"];
+}
+
+<h2>@data.Title Overview</h2>
+
+<h3>@data.Summary</h3>
+
+<h3>Last Updated: @data.LastUpdated</h3>
+
+<h3>High Level Process</h3>
+<li>
+    @foreach (var row in data.ProcessDictionary)
+    {
+        <ul>@row.Key  @row.Value</ul>
+    }
+</li>
+
+<h3>Important Notes:</h3>
+<li>
+    @foreach (var row in data.Notes)
+    {
+        <ul>@row</ul>
+    }
+</li>
+
