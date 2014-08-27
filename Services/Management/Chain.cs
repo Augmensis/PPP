@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PPPServices.Management
+namespace Services.Management
 {
-    class Account
+    class Chain
     {
-
     }
 }

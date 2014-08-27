@@ -9,7 +9,7 @@ namespace PPP.Controllers
     public class SellingController : Controller
     {
         // GET: Selling
-        public ActionResult Index()
+        public ActionResult Start()
         {
             return View();
         }

@@ -9,11 +9,9 @@ namespace PPP.Controllers
     public class ChainController : Controller
     {
         // GET: Chain
-        public ActionResult Index()
+        public ActionResult Start()
         {
-            var shizz = new PPPServices.Service1().GetData(9001);
-            
-            return null;
+            return View();
         }
     }
 }
