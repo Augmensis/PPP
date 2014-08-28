@@ -13,7 +13,8 @@ namespace PPP.Controllers
 
         public ActionResult Signup(string id = "")
         {
-            return View(ViewBag.ContentType = id);
+            ViewBag.ContentType = id;
+            return View();
         }
     }
 }
