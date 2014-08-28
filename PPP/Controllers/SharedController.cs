@@ -11,10 +11,23 @@ namespace PPP.Controllers
             return View(ViewData["content"] = new Content.Overview().GetOverview(id));
         }
 
+        [HttpGet]
         public ActionResult Signup(string id = "")
         {
             ViewBag.ContentType = id;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Signup(Account acc)
+        {
+            if (acc == null)
+            {
+                return RedirectToAction("Signup");
+            }
+
+            var newAccount = acc;
+            return RedirectToRoute(acc.AccountStatus.ToString(), newAccount);
         }
     }
 }

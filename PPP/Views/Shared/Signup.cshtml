@@ -1,6 +1,5 @@
-﻿@{
-    ViewBag.Title = "View";
-}
+﻿@using Services.Management
+@model Account
 <h1>Sign Up (it's free!)</h1>
 
 <h2>First, a few things about you</h2>
@@ -8,5 +7,129 @@
 <h4>Please fill in the following form with your personal details.<br />
     These will be used to help pre-populate any relevant legal forms for you, speeding up the entire @ViewBag.ContentType transaction process.</h4>
 
-
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <div class="user-field">
+            <div>
+                @Html.Label("*Salutation")
+                @Html.TextBoxFor(model => model.Salutation)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.FirstName, "*Fore Name(s):")
+                @Html.TextBoxFor(model => model.FirstName)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.LastName, "*Last Name:")
+                @Html.TextBoxFor(model => model.LastName)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.EmailAddress, "*Valid Email Address:")
+                @Html.TextBoxFor(model => model.EmailAddress)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.PasswordInput, "*Password:")
+                @Html.TextBoxFor(model => model.PasswordInput)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.PasswordInput, "*Password Confirmation:")
+                @Html.TextBoxFor(model => model.PasswordInput)
+            </div>
+        </div>
+        
+        <div class="address-field">
+            <h3>Optional:</h3>
+            <h4>To help populate legal forms automatically, tell us your current residential address below.</h4>
+            <div>
+                @Html.LabelFor(model => model.CurrentAddress.AddressLine1, "Address Line 1:")
+                @Html.TextBoxFor(model => model.CurrentAddress.AddressLine1)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.CurrentAddress.AddressLine2, "Address Line 2:")
+                @Html.TextBoxFor(model => model.CurrentAddress.AddressLine2)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.CurrentAddress.AddressLine3, "Address Line 3:")
+                @Html.TextBoxFor(model => model.CurrentAddress.AddressLine3)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.CurrentAddress.City, "City:")
+                @Html.TextBoxFor(model => model.CurrentAddress.City)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.CurrentAddress.County, "County:")
+                @Html.TextBoxFor(model => model.CurrentAddress.County)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.CurrentAddress.AddressPostcode, "Postcode:")
+                @Html.TextBoxFor(model => model.CurrentAddress.AddressPostcode)
+            </div>
+        </div>
+        
+        @if (ViewBag.ContentType != "selling")
+        {
+            <div class="address-field">
+                <h3>Optional:</h3>
+                <h4>We can help speed up the entire transaction process by letting us know the address of the property you intend to buy.</h4>
+                <div>
+                    @Html.LabelFor(model => model.BuyingAddress.AddressLine1, "Address Line 1:")
+                    @Html.TextBoxFor(model => model.BuyingAddress.AddressLine1)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.BuyingAddress.AddressLine2, "Address Line 2:")
+                    @Html.TextBoxFor(model => model.BuyingAddress.AddressLine2)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.BuyingAddress.AddressLine3, "Address Line 3:")
+                    @Html.TextBoxFor(model => model.BuyingAddress.AddressLine3)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.BuyingAddress.City, "Town/City:")
+                    @Html.TextBoxFor(model => model.BuyingAddress.City)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.BuyingAddress.County, "County:")
+                    @Html.TextBoxFor(model => model.BuyingAddress.County)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.BuyingAddress.AddressPostcode, "Postcode:")
+                    @Html.TextBoxFor(model => model.BuyingAddress.AddressPostcode)
+                </div>
+            </div>
+        }
+        
+        @if (ViewBag.ContentType != "buying")
+        {
+            <div class="address-field">
+                <h3>Optional:</h3>
+                <h4>We can help speed up the entire transaction process by letting us know the address of the property you intend to Sell.</h4>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.AddressLine1, "Address Line 1:")
+                    @Html.TextBoxFor(model => model.SellingAddress.AddressLine1)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.AddressLine2, "Address Line 2:")
+                    @Html.TextBoxFor(model => model.SellingAddress.AddressLine2)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.AddressLine3, "Address Line 3:")
+                    @Html.TextBoxFor(model => model.SellingAddress.AddressLine3)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.City, "Town/City:")
+                    @Html.TextBoxFor(model => model.SellingAddress.City)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.County, "County:")
+                    @Html.TextBoxFor(model => model.SellingAddress.County)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.AddressPostcode, "Postcode:")
+                    @Html.TextBoxFor(model => model.SellingAddress.AddressPostcode)
+                </div>
+            </div>
+        }
+        <input type="submit" value="Create New Account"/>
+    </fieldset>
+}
 
