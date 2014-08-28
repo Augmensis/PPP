@@ -24,6 +24,12 @@ namespace PPP
                 url: "Overview/{id}",
                 defaults: new { controller = "Shared", action = "Overview", id = UrlParameter.Optional }
                 );
+
+            routes.MapRoute(
+                name: "Signup",
+                url: "Signup/{id}",
+                defaults: new { controller = "Shared", action = "Signup", id = UrlParameter.Optional }
+                );
            
             routes.MapRoute(
                 name: "Default",

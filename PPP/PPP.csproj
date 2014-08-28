@@ -237,6 +237,7 @@
     <Content Include="Views\Chain\Start.cshtml" />
     <Content Include="Views\Selling\Start.cshtml" />
     <Content Include="Views\Shared\Overview.cshtml" />
+    <Content Include="Views\Shared\Signup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

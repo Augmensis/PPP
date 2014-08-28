@@ -1,27 +1,28 @@
-﻿@using Services.Management
-@{
-    var data = (Services.Management.Content.Overview)ViewData["Content"];
+﻿@{
+    var data = (Services.Management.Content.Overview)ViewData["content"];
 }
 
 <h2>@data.Title Overview</h2>
 
 <h3>@data.Summary</h3>
 
-<h3>Last Updated: @data.LastUpdated</h3>
+<h4>Last Updated: @data.LastUpdated</h4>
 
 <h3>High Level Process</h3>
-<li>
+<ol>
     @foreach (var row in data.ProcessDictionary)
     {
-        <ul>@row.Key  @row.Value</ul>
+        <li>@row.Key  @row.Value</li>
     }
-</li>
+</ol>
 
 <h3>Important Notes:</h3>
-<li>
+<ul>
     @foreach (var row in data.Notes)
     {
-        <ul>@row</ul>
+        <li>@row</li>
     }
-</li>
+</ul>
+
+<p><a class="btn btn-default" href="../Signup/@data.ControllerName">Buy & Sell A Property</a></p>
 

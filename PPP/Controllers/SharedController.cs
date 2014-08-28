@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Services;
+﻿using System.Web.Mvc;
 using Services.Management;
 
 namespace PPP.Controllers
@@ -11,11 +6,14 @@ namespace PPP.Controllers
     public class SharedController : Controller
     {
         // GET: Shared
-        public ActionResult Overview(string resource = "")
+        public ActionResult Overview(string id = "")
         {
-            var overviewContent = new Services.Management.Content.Overview().GetOverviewContent(resource);
-            ViewData["Content"] = overviewContent;
-            return View();
+            return View(ViewData["content"] = new Content.Overview().GetOverview(id));
+        }
+
+        public ActionResult Signup(string id = "")
+        {
+            return View(ViewBag.ContentType = id);
         }
     }
 }
