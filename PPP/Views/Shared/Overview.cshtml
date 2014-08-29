@@ -10,9 +10,9 @@
 
 <h3>High Level Process</h3>
 <ol>
-    @foreach (var row in data.ProcessDictionary)
+    @foreach (var row in data.ProcessDictionary.OrderBy(k => k.Key))
     {
-        <li>@row.Key  @row.Value</li>
+        <li>@row.Value</li>
     }
 </ol>
 

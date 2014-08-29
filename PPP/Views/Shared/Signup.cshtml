@@ -11,6 +11,7 @@
 {
     <fieldset>
         <div class="user-field">
+            <h3>Account Details:</h3>
             <div>
                 @Html.Label("*Salutation")
                 @Html.TextBoxFor(model => model.Salutation)
@@ -38,7 +39,7 @@
         </div>
         
         <div class="address-field">
-            <h3>Optional:</h3>
+            <h3>Optional (Current Address):</h3>
             <h4>To help populate legal forms automatically, tell us your current residential address below.</h4>
             <div>
                 @Html.LabelFor(model => model.CurrentAddress.AddressLine1, "Address Line 1:")
@@ -69,7 +70,7 @@
         @if (ViewBag.ContentType != "selling")
         {
             <div class="address-field">
-                <h3>Optional:</h3>
+                <h3>Optional (Buying Address):</h3>
                 <h4>We can help speed up the entire transaction process by letting us know the address of the property you intend to buy.</h4>
                 <div>
                     @Html.LabelFor(model => model.BuyingAddress.AddressLine1, "Address Line 1:")
@@ -101,7 +102,7 @@
         @if (ViewBag.ContentType != "buying")
         {
             <div class="address-field">
-                <h3>Optional:</h3>
+                <h3>Optional (Selling Address):</h3>
                 <h4>We can help speed up the entire transaction process by letting us know the address of the property you intend to Sell.</h4>
                 <div>
                     @Html.LabelFor(model => model.SellingAddress.AddressLine1, "Address Line 1:")
