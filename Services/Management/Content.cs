@@ -81,12 +81,13 @@ namespace Services.Management
                 return this;
             }
 
+#region Seller Content
             protected Dictionary<int, string> GetSellingProcessOverview()
             {
                 var tempDictionary = new Dictionary<int, string>();
                 var i = 1;
-                tempDictionary.Add(i,"Send Form OC1 (or OC2 if neccesary) for Office Copies.");
-                tempDictionary.Add(++i,"Obtain a copy of the Title Plan.");
+                tempDictionary.Add(i, "Send Form OC1 (or OC2 if neccesary) for Office Copies.");
+                tempDictionary.Add(++i, "Obtain a copy of the Title Plan.");
                 tempDictionary.Add(++i, "Obtain EPC (Energy Performance Certificate) for the proerty.");
                 tempDictionary.Add(++i, "Obtain copies of any documents referred to in the register.");
                 tempDictionary.Add(++i, "Obtain copies of any lease from the Land Registry.");
@@ -106,7 +107,9 @@ namespace Services.Management
                 tempDictionary.Add(++i, "You've just completed the transaction. Well done!");
                 return tempDictionary;
             }
+#endregion Seller Content
 
+#region Buyer Content
             protected Dictionary<int, string> GetBuyingProcessOverview()
             {
                 var tempDictionary = new Dictionary<int, string>();
@@ -132,7 +135,9 @@ namespace Services.Management
                 tempDictionary.Add(++i, "");
                 return tempDictionary;
             }
+#endregion Buyer Content
 
+#region Chain Content
             protected Dictionary<int, string> GetChainProcessOverview()
             {
                 var tempDictionary = new Dictionary<int, string>();
@@ -160,8 +165,8 @@ namespace Services.Management
             }
 
         }
+#endregion Chain Content
 
-        
 
 
     }

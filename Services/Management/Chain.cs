@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Services.Management
 {
-    class Chain
+    class Chain : Account
     {
     }
 }

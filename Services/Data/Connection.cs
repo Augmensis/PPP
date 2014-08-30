@@ -28,8 +28,8 @@ namespace Services.Data
             catch (MySqlException ex)
             {
                 //Email connection toubles to dev
-                return null;
-            }
+                throw new Exception("Connection Fail:", ex);
+             }
         }
 
         public DataTable GetMySqlTable(string sql, object[] commandParams = null, int timeout = SQL_DEFAULT_TIMEOUT)
