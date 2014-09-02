@@ -11,8 +11,9 @@ namespace Services.Management
 {
     public class Content
     {
-        public enum enControllerTypes
-        {
+        protected string SQL_ContentInsert = "INSERT INTO `citizenDB`.`Contents` (`id`, `Type`, `Title`,`Summary`,`ControllerName`,`LastUpdated`,`CreationDate`,`ViewName`)VALUES(<{@id }>,<{@Type }>,<{@Title }>,<{@Summary }>,<{@ControllerName}>,<{@LastUpdated }>,<{@CreationDate }>,<{@ViewName }>)";
+                                             
+        public enum enControllerTypes{
             nothing,
             buying,
             selling,

@@ -14,7 +14,7 @@ namespace Services.Data
     class Connection
     {
         private MySql.Data.MySqlClient.MySqlConnection conn;
-        private const string BASE_CONNECTION = "server=127.0.0.1;uid=user;pwd=password;database=database;";
+        private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=database;";
         private const int SQL_DEFAULT_TIMEOUT = 60;
 
         public MySqlConnection OpenConnection(string connectionString = BASE_CONNECTION)
