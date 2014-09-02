@@ -3,8 +3,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using MySql.Data;
-using MySql.Data.MySqlClient;
 
 namespace PPP.Models
 {
@@ -22,15 +20,11 @@ namespace PPP.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        static ApplicationDbContext()
+        public ApplicationDbContext()
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
-            Database.SetInitializer(new MySqlInitialiser());
         }
 
-        public ApplicationDbContext()
-            : base("DefaultConnection")
-        {
-        }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

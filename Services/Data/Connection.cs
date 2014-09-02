@@ -21,7 +21,7 @@ namespace Services.Data
         {
             try
             {
-                conn = new MySqlConnection {ConnectionString = connectionString};
+                conn = new MySqlConnection { ConnectionString = connectionString };
                 conn.Open();
                 return conn;
             }
@@ -29,7 +29,7 @@ namespace Services.Data
             {
                 //Email connection toubles to dev
                 throw new Exception("Connection Fail:", ex);
-             }
+            }
         }
 
         public DataTable GetMySqlTable(string sql, object[] commandParams = null, int timeout = SQL_DEFAULT_TIMEOUT)
@@ -59,8 +59,8 @@ namespace Services.Data
             if (sql.Contains("@"))
             {
                 var paramNames = new List<string>();
-                
-                sql = Regex.Replace(sql,"\\s+", " ").Trim();
+
+                sql = Regex.Replace(sql, "\\s+", " ").Trim();
                 var words = new List<string>(sql.Split(' '));
 
                 foreach (var word in words)
