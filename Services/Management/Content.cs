@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -11,8 +12,10 @@ namespace Services.Management
 {
     public class Content
     {
-        protected string SQL_ContentInsert = "INSERT INTO `citizenDB`.`Contents` (`id`, `Type`, `Title`,`Summary`,`ControllerName`,`LastUpdated`,`CreationDate`,`ViewName`)VALUES(<{@id }>,<{@Type }>,<{@Title }>,<{@Summary }>,<{@ControllerName}>,<{@LastUpdated }>,<{@CreationDate }>,<{@ViewName }>)";
-                                             
+        protected const string SQL_ContentInsert = "INSERT INTO `citizenDB`.`Contents` (`id`, `Type`, `Title`,`Summary`,`ControllerName`,`LastUpdated`,`CreationDate`,`ViewName`)VALUES(<{@id }>,<{@Type }>,<{@Title }>,<{@Summary }>,<{@ControllerName}>,<{@LastUpdated }>,<{@CreationDate }>,<{@ViewName }>);";
+        protected const string SQL_ConnectGetAll = "Select * from citizenDB.Content;";
+
+
         public enum enControllerTypes{
             nothing,
             buying,
@@ -83,29 +86,36 @@ namespace Services.Management
             }
 
 #region Seller Content
-            protected Dictionary<int, string> GetSellingProcessOverview()
+            protected static Dictionary<int, string> GetSellingProcessOverview()
             {
+                var dt = GetAllContent();
                 var tempDictionary = new Dictionary<int, string>();
-                var i = 1;
-                tempDictionary.Add(i, "Send Form OC1 (or OC2 if neccesary) for Office Copies.");
-                tempDictionary.Add(++i, "Obtain a copy of the Title Plan.");
-                tempDictionary.Add(++i, "Obtain EPC (Energy Performance Certificate) for the proerty.");
-                tempDictionary.Add(++i, "Obtain copies of any documents referred to in the register.");
-                tempDictionary.Add(++i, "Obtain copies of any lease from the Land Registry.");
-                tempDictionary.Add(++i, "Send documents to buyer / buyer's solicitor (Draft Contract, Property Information Forms, Office Copies, Fixtures, Fittings & Contents Form).");
-                tempDictionary.Add(++i, "Respond to any enquiries from the buyer.");
-                tempDictionary.Add(++i, "Make it clear when, where and how you want to get paid.");
-                tempDictionary.Add(++i, "If you have broken any Covenants within the last 20 years, buy Covenant Indemnity Insurance for the buyer... at your own expense. Also write the event into the contract.");
-                tempDictionary.Add(++i, "When the contract has been returned, check for any changes & when happy, sign and return it to the buyer / buyer's solicitor.");
-                tempDictionary.Add(++i, "Contracts are now Exchanged.");
-                tempDictionary.Add(++i, "Receive the Draft Transfer from the buyer, checking payment price and spellings of all names and addresses.");
-                tempDictionary.Add(++i, "Receive Requisitions on Title from the buyer & answer all questions that are raised.");
-                tempDictionary.Add(++i, "Prepare the completion statement.");
-                tempDictionary.Add(++i, "Sign Transfer form TR1 (or TP1 or TR2).");
-                tempDictionary.Add(++i, "Things");
-                tempDictionary.Add(++i, "and stuff");
-                tempDictionary.Add(++i, "and such");
-                tempDictionary.Add(++i, "You've just completed the transaction. Well done!");
+
+                foreach(var content in dt.AsEnumerable())
+                {
+                    tempDictionary.Add((int)content["Position"], (string)content["Title"]);
+                }
+
+                //var i = 1;
+                //tempDictionary.Add(i, "Send Form OC1 (or OC2 if neccesary) for Office Copies.");
+                //tempDictionary.Add(++i, "Obtain a copy of the Title Plan.");
+                //tempDictionary.Add(++i, "Obtain EPC (Energy Performance Certificate) for the proerty.");
+                //tempDictionary.Add(++i, "Obtain copies of any documents referred to in the register.");
+                //tempDictionary.Add(++i, "Obtain copies of any lease from the Land Registry.");
+                //tempDictionary.Add(++i, "Send documents to buyer / buyer's solicitor (Draft Contract, Property Information Forms, Office Copies, Fixtures, Fittings & Contents Form).");
+                //tempDictionary.Add(++i, "Respond to any enquiries from the buyer.");
+                //tempDictionary.Add(++i, "Make it clear when, where and how you want to get paid.");
+                //tempDictionary.Add(++i, "If you have broken any Covenants within the last 20 years, buy Covenant Indemnity Insurance for the buyer... at your own expense. Also write the event into the contract.");
+                //tempDictionary.Add(++i, "When the contract has been returned, check for any changes & when happy, sign and return it to the buyer / buyer's solicitor.");
+                //tempDictionary.Add(++i, "Contracts are now Exchanged.");
+                //tempDictionary.Add(++i, "Receive the Draft Transfer from the buyer, checking payment price and spellings of all names and addresses.");
+                //tempDictionary.Add(++i, "Receive Requisitions on Title from the buyer & answer all questions that are raised.");
+                //tempDictionary.Add(++i, "Prepare the completion statement.");
+                //tempDictionary.Add(++i, "Sign Transfer form TR1 (or TP1 or TR2).");
+                //tempDictionary.Add(++i, "Things");
+                //tempDictionary.Add(++i, "and stuff");
+                //tempDictionary.Add(++i, "and such");
+                //tempDictionary.Add(++i, "You've just completed the transaction. Well done!");
                 return tempDictionary;
             }
 #endregion Seller Content
@@ -168,7 +178,18 @@ namespace Services.Management
         }
 #endregion Chain Content
 
+#region Connection Builders
 
+        protected static DataTable GetAllContent()
+        {
+            return Services.Data.Connection.GetMySqlTable(SQL_ConnectGetAll);
+        }
+
+
+
+
+
+#endregion
 
     }
 }

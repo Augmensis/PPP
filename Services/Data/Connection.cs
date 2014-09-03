@@ -13,11 +13,11 @@ namespace Services.Data
 {
     class Connection
     {
-        private MySql.Data.MySqlClient.MySqlConnection conn;
+        private static MySql.Data.MySqlClient.MySqlConnection conn;
         private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=database;";
         private const int SQL_DEFAULT_TIMEOUT = 60;
 
-        public MySqlConnection OpenConnection(string connectionString = BASE_CONNECTION)
+        public static MySqlConnection OpenConnection(string connectionString = BASE_CONNECTION)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Services.Data
             }
         }
 
-        public DataTable GetMySqlTable(string sql, object[] commandParams = null, int timeout = SQL_DEFAULT_TIMEOUT)
+        public static DataTable GetMySqlTable(string sql, object[] commandParams = null, int timeout = SQL_DEFAULT_TIMEOUT)
         {
             MySqlCommand cmd = MySQLCommandBuilder(sql, commandParams);
             var adp = new MySqlDataAdapter();
@@ -52,7 +52,7 @@ namespace Services.Data
             return dt;
         }
 
-        private MySqlCommand MySQLCommandBuilder(string sql, object[] commandParams, int timeout = SQL_DEFAULT_TIMEOUT)
+        private static MySqlCommand MySQLCommandBuilder(string sql, object[] commandParams, int timeout = SQL_DEFAULT_TIMEOUT)
         {
             var cmd = new MySqlCommand();
 
