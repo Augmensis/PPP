@@ -14,7 +14,7 @@ namespace Services.Data
     class Connection
     {
         private static MySql.Data.MySqlClient.MySqlConnection conn;
-        private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=database;";
+        private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=citizenDB;";
         private const int SQL_DEFAULT_TIMEOUT = 60;
 
         public static MySqlConnection OpenConnection(string connectionString = BASE_CONNECTION)
@@ -52,9 +52,9 @@ namespace Services.Data
             return dt;
         }
 
-        private static MySqlCommand MySQLCommandBuilder(string sql, object[] commandParams, int timeout = SQL_DEFAULT_TIMEOUT)
+        public static MySqlCommand MySQLCommandBuilder(string sql, object[] commandParams, int timeout = SQL_DEFAULT_TIMEOUT)
         {
-            var cmd = new MySqlCommand();
+            var cmd = new MySqlCommand(sql);
 
             if (sql.Contains("@"))
             {
@@ -66,9 +66,9 @@ namespace Services.Data
                 foreach (var word in words)
                 {
                     var cleanName = word.ToLower().Trim();
-                    if (cleanName.StartsWith("@") && !paramNames.Contains(cleanName))
+                    if (word.StartsWith("@") && !paramNames.Contains(word))
                     {
-                        paramNames.Add(cleanName.TrimEnd(','));
+                        paramNames.Add(word.TrimEnd(','));
                     }
                 }
 
@@ -79,7 +79,8 @@ namespace Services.Data
 
                 for (var i = 0; i < commandParams.Length; i++)
                 {
-                    cmd.Parameters.AddWithValue(paramNames[i], commandParams[i] ?? DBNull.Value);
+                    //cmd.Parameters.AddWithValue(paramNames[i], commandParams[i] ?? DBNull.Value);
+                    cmd.CommandText = cmd.CommandText.Replace(paramNames[i], commandParams[i].ToString());
                 }
             }
             cmd.CommandTimeout = timeout;

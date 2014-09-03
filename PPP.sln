@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPP", "PPP\PPP.csproj", "{E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{A15C347B-10FE-468F-9D9B-AE97A142E167}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPPConsole", "PPPConsole\PPPConsole.csproj", "{0A54447F-817D-46FC-AC66-622E202ED1AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A15C347B-10FE-468F-9D9B-AE97A142E167}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A15C347B-10FE-468F-9D9B-AE97A142E167}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A15C347B-10FE-468F-9D9B-AE97A142E167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A54447F-817D-46FC-AC66-622E202ED1AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A54447F-817D-46FC-AC66-622E202ED1AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A54447F-817D-46FC-AC66-622E202ED1AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A54447F-817D-46FC-AC66-622E202ED1AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,12 +7,13 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace Services.Management
 {
     public class Content
     {
-        protected const string SQL_ContentInsert = "INSERT INTO `citizenDB`.`Contents` (`id`, `Type`, `Title`,`Summary`,`ControllerName`,`LastUpdated`,`CreationDate`,`ViewName`)VALUES(<{@id }>,<{@Type }>,<{@Title }>,<{@Summary }>,<{@ControllerName}>,<{@LastUpdated }>,<{@CreationDate }>,<{@ViewName }>);";
+        protected const string SQL_ContentInsert = "INSERT INTO citizenDB.Contents (Type, Title, Summary, ControllerName ,LastUpdated ,CreationDate ,ViewName ) VALUES ( @Type , @Title , @Summary , @ControllerName , @LastUpdated , @CreationDate , @ViewName );";
         protected const string SQL_ConnectGetAll = "Select * from citizenDB.Content;";
         protected const string SQL_ConnectGetSellingOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'selling' and type = 2";
         protected const string SQL_ConnectGetBuyingOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'buying' and type = 1'";
@@ -164,7 +165,9 @@ namespace Services.Management
 
 #region Admin Inserts
 
-        protected static void AddOverviewToSeller()
+        
+
+        public static void AddOverviewToSeller()
         {
             var tempDictionary = new Dictionary<int, string>();
             var i = 1;
@@ -188,13 +191,28 @@ namespace Services.Management
             tempDictionary.Add(++i, "and such");
             tempDictionary.Add(++i, "You've just completed the transaction. Well done!");
 
+            foreach (var step in tempDictionary)
+            {
+                InsertToContentTable(enControllerTypes.selling, "Selling", "Overview", step.Key, step.Value, "", DateTime.UtcNow);
+            }
+
+        }
+
+        protected static void InsertToContentTable(enControllerTypes type, string controllerName, string viewName, int position, string title, string summary, DateTime date)
+        {
+            //Type, Title, Summary, ControllerName ,LastUpdated ,CreationDate ,ViewName
+            var cmd = Services.Data.Connection.MySQLCommandBuilder(SQL_ContentInsert, new object[] {type, title, summary, controllerName, date, date, viewName});
+            cmd.Connection = Services.Data.Connection.OpenConnection();
+            var adp = new MySqlDataAdapter{InsertCommand = cmd};
+            cmd.Connection.Close();
+            cmd.Connection.Dispose();
+            cmd.Dispose();
+            adp.Dispose();
         }
 
 
 
-
-
-        #endregion
+#endregion
 
     }
 }
