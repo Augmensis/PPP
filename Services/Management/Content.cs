@@ -13,7 +13,7 @@ namespace Services.Management
 {
     public class Content
     {
-        protected const string SQL_ContentInsert = "INSERT INTO citizenDB.Contents (Type, Title, Summary, ControllerName ,LastUpdated ,CreationDate ,ViewName ) VALUES ( @Type , @Title , @Summary , @ControllerName , @LastUpdated , @CreationDate , @ViewName );";
+        protected const string SQL_ContentInsert = "INSERT INTO 'citizenDB'.'Contents' ('Type', 'Title', 'Summary', 'ControllerName' ,'LastUpdated' ,'CreationDate' ,'ViewName', 'Position' ) VALUES ( @Type , @Title , @Summary , @ControllerName , @LastUpdated , @CreationDate , @ViewName , @Position );";
         protected const string SQL_ConnectGetAll = "Select * from citizenDB.Content;";
         protected const string SQL_ConnectGetSellingOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'selling' and type = 2";
         protected const string SQL_ConnectGetBuyingOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'buying' and type = 1'";
@@ -22,10 +22,10 @@ namespace Services.Management
 
 
         public enum enControllerTypes{
-            nothing,
-            buying,
-            selling,
-            chain
+            nothing = 0,
+            buying = 1,
+            selling = 2,
+            chain = 3
         }
 
         public class Overview
@@ -193,15 +193,15 @@ namespace Services.Management
 
             foreach (var step in tempDictionary)
             {
-                InsertToContentTable(enControllerTypes.selling, "Selling", "Overview", step.Key, step.Value, "", DateTime.UtcNow);
+                InsertToContentTable(enControllerTypes.selling, step.Value, "", "Selling", DateTime.UtcNow, "Overview", step.Key);
             }
 
         }
 
-        protected static void InsertToContentTable(enControllerTypes type, string controllerName, string viewName, int position, string title, string summary, DateTime date)
+        protected static void InsertToContentTable(enControllerTypes type, string title, string summary, string controllerName, DateTime date, string viewName, int position)
         {
-            //Type, Title, Summary, ControllerName ,LastUpdated ,CreationDate ,ViewName
-            var cmd = Services.Data.Connection.MySQLCommandBuilder(SQL_ContentInsert, new object[] {type, title, summary, controllerName, date, date, viewName});
+            //'Type', 'Title', 'Summary', 'ControllerName' ,'LastUpdated' ,'CreationDate' ,'ViewName', 'Position'
+            var cmd = Services.Data.Connection.MySQLCommandBuilder(SQL_ContentInsert, new object[] { type, title, summary, controllerName, new MySql.Data.Types.MySqlDateTime(date), new MySql.Data.Types.MySqlDateTime(date), viewName, position });
             cmd.Connection = Services.Data.Connection.OpenConnection();
             var adp = new MySqlDataAdapter{InsertCommand = cmd};
             cmd.Connection.Close();

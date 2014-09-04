@@ -79,8 +79,8 @@ namespace Services.Data
 
                 for (var i = 0; i < commandParams.Length; i++)
                 {
-                    //cmd.Parameters.AddWithValue(paramNames[i], commandParams[i] ?? DBNull.Value);
-                    cmd.CommandText = cmd.CommandText.Replace(paramNames[i], commandParams[i].ToString());
+                    cmd.Parameters.AddWithValue(paramNames[i], commandParams[i] ?? DBNull.Value);
+                    //cmd.CommandText = cmd.CommandText.Replace(paramNames[i], commandParams[i].ToString());
                 }
             }
             cmd.CommandTimeout = timeout;
