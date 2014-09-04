@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Connection.cs" />
+    <Compile Include="Data\Conversion.cs" />
     <Compile Include="Management\Account.cs" />
     <Compile Include="Management\Buyer.cs" />
     <Compile Include="Management\Chain.cs" />

@@ -14,7 +14,7 @@ namespace Services.Data
     class Connection
     {
         private static MySql.Data.MySqlClient.MySqlConnection conn;
-        private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=citizenDB;";
+        private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=citizenDB;Convert Zero Datetime=True;Allow Zero Datetime=True;";
         private const int SQL_DEFAULT_TIMEOUT = 60;
 
         public static MySqlConnection OpenConnection(string connectionString = BASE_CONNECTION)
@@ -40,6 +40,7 @@ namespace Services.Data
 
             cmd.Connection = OpenConnection();
             cmd.CommandTimeout = timeout;
+
             if (cmd.Connection.State != ConnectionState.Open)
             {
                 cmd.Connection.Open();
