@@ -13,11 +13,11 @@ namespace Services.Management
 {
     public class Content
     {
-        protected const string SQL_ContentInsert = "INSERT INTO 'citizenDB'.'Contents' ('Type', 'Title', 'Summary', 'ControllerName' ,'LastUpdated' ,'CreationDate' ,'ViewName', 'Position' ) VALUES ( @Type , @Title , @Summary , @ControllerName , @LastUpdated , @CreationDate , @ViewName , @Position );";
+        protected const string SQL_ContentInsert = "INSERT INTO citizenDB.Contents (Type, Title, Summary, ControllerName ,LastUpdated ,CreationDate ,ViewName, Position ) VALUES ( @Type , @Title , @Summary , @ControllerName , @LastUpdated , @CreationDate , @ViewName , @Position );";
         protected const string SQL_ConnectGetAll = "Select * from citizenDB.Content;";
-        protected const string SQL_ConnectGetSellingOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'selling' and type = 2";
-        protected const string SQL_ConnectGetBuyingOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'buying' and type = 1'";
-        protected const string SQL_ConnectGetChainOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'chain' and type = 3";
+        protected const string SQL_ConnectGetSellingOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'selling' and type = 2 order by Position asc;";
+        protected const string SQL_ConnectGetBuyingOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'buying' and type = 1 order by Position asc;";
+        protected const string SQL_ConnectGetChainOverview = "Select Position, title from citizenDB.Contents where ControllerName = 'chain' and type = 3 order by Position asc;";
 
 
 
@@ -167,47 +167,55 @@ namespace Services.Management
 
         
 
-        public static void AddOverviewToSeller()
-        {
-            var tempDictionary = new Dictionary<int, string>();
-            var i = 1;
-            tempDictionary.Add(i, "Send Form OC1 (or OC2 if neccesary) for Office Copies.");
-            tempDictionary.Add(++i, "Obtain a copy of the Title Plan.");
-            tempDictionary.Add(++i, "Obtain EPC (Energy Performance Certificate) for the proerty.");
-            tempDictionary.Add(++i, "Obtain copies of any documents referred to in the register.");
-            tempDictionary.Add(++i, "Obtain copies of any lease from the Land Registry.");
-            tempDictionary.Add(++i, "Send documents to buyer / buyer's solicitor (Draft Contract, Property Information Forms, Office Copies, Fixtures, Fittings & Contents Form).");
-            tempDictionary.Add(++i, "Respond to any enquiries from the buyer.");
-            tempDictionary.Add(++i, "Make it clear when, where and how you want to get paid.");
-            tempDictionary.Add(++i, "If you have broken any Covenants within the last 20 years, buy Covenant Indemnity Insurance for the buyer... at your own expense. Also write the event into the contract.");
-            tempDictionary.Add(++i, "When the contract has been returned, check for any changes & when happy, sign and return it to the buyer / buyer's solicitor.");
-            tempDictionary.Add(++i, "Contracts are now Exchanged.");
-            tempDictionary.Add(++i, "Receive the Draft Transfer from the buyer, checking payment price and spellings of all names and addresses.");
-            tempDictionary.Add(++i, "Receive Requisitions on Title from the buyer & answer all questions that are raised.");
-            tempDictionary.Add(++i, "Prepare the completion statement.");
-            tempDictionary.Add(++i, "Sign Transfer form TR1 (or TP1 or TR2).");
-            tempDictionary.Add(++i, "Things");
-            tempDictionary.Add(++i, "and stuff");
-            tempDictionary.Add(++i, "and such");
-            tempDictionary.Add(++i, "You've just completed the transaction. Well done!");
+        //public static void AddOverviewToSeller()
+        //{
+        //    var tempDictionary = new Dictionary<int, string>();
+        //    var i = 1;
+        //    tempDictionary.Add(i, "Send Form OC1 (or OC2 if neccesary) for Office Copies.");
+        //    tempDictionary.Add(++i, "Obtain a copy of the Title Plan.");
+        //    tempDictionary.Add(++i, "Obtain EPC (Energy Performance Certificate) for the proerty.");
+        //    tempDictionary.Add(++i, "Obtain copies of any documents referred to in the register.");
+        //    tempDictionary.Add(++i, "Obtain copies of any lease from the Land Registry.");
+        //    tempDictionary.Add(++i, "Send documents to buyer / buyer's solicitor (Draft Contract, Property Information Forms, Office Copies, Fixtures, Fittings & Contents Form).");
+        //    tempDictionary.Add(++i, "Respond to any enquiries from the buyer.");
+        //    tempDictionary.Add(++i, "Make it clear when, where and how you want to get paid.");
+        //    tempDictionary.Add(++i, "If you have broken any Covenants within the last 20 years, buy Covenant Indemnity Insurance for the buyer... at your own expense. Also write the event into the contract.");
+        //    tempDictionary.Add(++i, "When the contract has been returned, check for any changes & when happy, sign and return it to the buyer / buyer's solicitor.");
+        //    tempDictionary.Add(++i, "Contracts are now Exchanged.");
+        //    tempDictionary.Add(++i, "Receive the Draft Transfer from the buyer, checking payment price and spellings of all names and addresses.");
+        //    tempDictionary.Add(++i, "Receive Requisitions on Title from the buyer & answer all questions that are raised.");
+        //    tempDictionary.Add(++i, "Prepare the completion statement.");
+        //    tempDictionary.Add(++i, "Sign Transfer form TR1 (or TP1 or TR2).");
+        //    tempDictionary.Add(++i, "Things");
+        //    tempDictionary.Add(++i, "and stuff");
+        //    tempDictionary.Add(++i, "and such");
+        //    tempDictionary.Add(++i, "You've just completed the transaction. Well done!");
 
-            foreach (var step in tempDictionary)
-            {
-                InsertToContentTable(enControllerTypes.selling, step.Value, "", "Selling", DateTime.UtcNow, "Overview", step.Key);
-            }
+        //    foreach (var step in tempDictionary)
+        //    {
+        //        InsertToContentTable(enControllerTypes.selling, step.Value, "", "Selling", DateTime.UtcNow, "Overview", step.Key);
+        //    }
 
-        }
+        //}
 
         protected static void InsertToContentTable(enControllerTypes type, string title, string summary, string controllerName, DateTime date, string viewName, int position)
         {
-            //'Type', 'Title', 'Summary', 'ControllerName' ,'LastUpdated' ,'CreationDate' ,'ViewName', 'Position'
-            var cmd = Services.Data.Connection.MySQLCommandBuilder(SQL_ContentInsert, new object[] { type, title, summary, controllerName, new MySql.Data.Types.MySqlDateTime(date), new MySql.Data.Types.MySqlDateTime(date), viewName, position });
-            cmd.Connection = Services.Data.Connection.OpenConnection();
-            var adp = new MySqlDataAdapter{InsertCommand = cmd};
-            cmd.Connection.Close();
-            cmd.Connection.Dispose();
-            cmd.Dispose();
-            adp.Dispose();
+            try
+            {
+                var cmd = Services.Data.Connection.MySQLCommandBuilder(SQL_ContentInsert, new object[] { type, title, summary, controllerName, new MySql.Data.Types.MySqlDateTime(date), new MySql.Data.Types.MySqlDateTime(date), viewName, position });
+                cmd.Connection = Services.Data.Connection.OpenConnection();
+                //var adp = new MySqlDataAdapter{InsertCommand = cmd};
+                cmd.ExecuteNonQuery();
+                cmd.Connection.Close();
+                cmd.Connection.Dispose();
+                cmd.Dispose();
+                //adp.Dispose();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
 

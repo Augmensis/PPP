@@ -10,7 +10,7 @@ namespace PPPConsole
     {
         static void Main(string[] args)
         {
-            Services.Management.Content.AddOverviewToSeller();
+            //Services.Management.Content.AddOverviewToSeller();
         }
     }
 }
