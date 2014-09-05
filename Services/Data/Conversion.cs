@@ -20,5 +20,6 @@ namespace Services.Data
             mysqlDate.Second = date.Second;
             return mysqlDate;
         }
+
     }
 }

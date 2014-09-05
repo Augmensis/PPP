@@ -35,12 +35,12 @@ namespace Services.Management
 
         public class Overview
         {
-            public static string Title { get; protected set; }
-            public static string Summary { get; protected set; }
-            public static DateTime LastUpdated { get; protected set; }
-            public static Dictionary<int, string> ProcessDictionary { get; protected set; }
-            public static List<String> Notes { get; protected set; }
-            public static string ControllerName { get; protected set; }
+            public  string Title { get; protected set; }
+            public  string Summary { get; protected set; }
+            public  DateTime LastUpdated { get; protected set; }
+            public  Dictionary<int, string> ProcessDictionary { get; protected set; }
+            public  List<String> Notes { get; protected set; }
+            public  string ControllerName { get; protected set; }
 
             public Overview()
             {
@@ -103,9 +103,9 @@ namespace Services.Management
 
                 foreach(var content in dt.AsEnumerable())
                 {
-                    tempDictionary.Add((int)content["Position"], (string)content["Title"]);
+                    tempDictionary.Add((int)content["Position"], content["Title"].ToString());
                 }
-                LastUpdated = (DateTime) dt.Rows[0]["LastUpdated"];
+                //LastUpdated = DateTime.Parse(dt.Rows[0]["LastUpdated"].ToString());
                 return tempDictionary;
             }
 #endregion Seller Content
@@ -191,9 +191,6 @@ namespace Services.Management
             tempDictionary.Add(++i, "Receive Requisitions on Title from the buyer & answer all questions that are raised.");
             tempDictionary.Add(++i, "Prepare the completion statement.");
             tempDictionary.Add(++i, "Sign Transfer form TR1 (or TP1 or TR2).");
-            tempDictionary.Add(++i, "Things");
-            tempDictionary.Add(++i, "and stuff");
-            tempDictionary.Add(++i, "and such");
             tempDictionary.Add(++i, "You've just completed the transaction. Well done!");
 
             foreach (var step in tempDictionary)
@@ -207,7 +204,7 @@ namespace Services.Management
         {
             try
             {
-                var cmd = Services.Data.Connection.MySQLCommandBuilder(SQL_ContentInsert, new object[] { type, title, summary, controllerName, Conversion.DateTimeToMySQL(date), Conversion.DateTimeToMySQL(date), viewName, position });
+                var cmd = Services.Data.Connection.MySQLCommandBuilder(SQL_ContentInsert, new object[] { type, title, summary, controllerName, date.ToString(), date.ToString(), viewName, position });
                 cmd.Connection = Services.Data.Connection.OpenConnection();
                 //var adp = new MySqlDataAdapter{InsertCommand = cmd};
                 cmd.ExecuteNonQuery();

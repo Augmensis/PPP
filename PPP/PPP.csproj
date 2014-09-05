@@ -166,7 +166,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuyingController.cs" />
+    <Compile Include="Controllers\CCController.cs" />
     <Compile Include="Controllers\ChainController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SellingController.cs" />
@@ -245,6 +247,9 @@
     <Content Include="Views\Selling\Start.cshtml" />
     <Content Include="Views\Shared\Overview.cshtml" />
     <Content Include="Views\Shared\Signup.cshtml" />
+    <Content Include="Views\CC\Overview.cshtml" />
+    <Content Include="Views\CC\Content.cshtml" />
+    <Content Include="Views\CC\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
