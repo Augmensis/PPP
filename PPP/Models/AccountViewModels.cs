@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
 
 namespace PPP.Models
 {
@@ -66,19 +67,42 @@ namespace PPP.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "*Email")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "*Password")]
         public string Password { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "*Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "*Title")]
+        public Services.Management.Account.enSalutaion Salutaion { get; set; }
+
+        [Required]
+        [Display(Name = "*First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "*Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Contact Address")]
+        public Services.Management.Address PrimaryAddress { get; set; }
+
+        [Display(Name = "Address being purchased")]
+        public Services.Management.Address PurchaseAddress { get; set; }        
+        
+        [Display(Name = "Address being sold")]
+        public Services.Management.Address SellingAddress { get; set; }
+        
     }
 
     public class ResetPasswordViewModel

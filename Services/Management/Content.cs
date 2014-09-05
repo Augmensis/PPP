@@ -11,6 +11,7 @@ using MySql.Data.MySqlClient;
 using MySql.Data.Types;
 using Services.Data;
 
+
 namespace Services.Management
 {
     public class Content
@@ -204,14 +205,7 @@ namespace Services.Management
         {
             try
             {
-                var cmd = Services.Data.Connection.MySQLCommandBuilder(SQL_ContentInsert, new object[] { type, title, summary, controllerName, date.ToString(), date.ToString(), viewName, position });
-                cmd.Connection = Services.Data.Connection.OpenConnection();
-                //var adp = new MySqlDataAdapter{InsertCommand = cmd};
-                cmd.ExecuteNonQuery();
-                cmd.Connection.Close();
-                cmd.Connection.Dispose();
-                cmd.Dispose();
-                //adp.Dispose();
+                Connection.ExcecuteMySql(SQL_ContentInsert, new object[] { type, title, summary, controllerName, date.ToString(), date.ToString(), viewName, position });
             }
             catch (Exception ex)
             {

@@ -9,10 +9,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PPP.Models;
+using Services.Management;
 
 namespace PPP.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -156,8 +158,10 @@ namespace PPP.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                //var acc = new Account(model);
                 if (result.Succeeded)
                 {
+                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -172,7 +176,7 @@ namespace PPP.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("Signup", model);
         }
 
         //

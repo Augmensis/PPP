@@ -3,6 +3,7 @@ using Services.Management;
 
 namespace PPP.Controllers
 {
+    [RequireHttps]
     public class SharedController : Controller
     {
         // GET: Shared

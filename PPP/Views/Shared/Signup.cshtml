@@ -1,4 +1,171 @@
-﻿@using Services.Management
+﻿@model PPP.Models.RegisterViewModel
+
+<h1>Sign Up (it's free!)</h1>
+
+<h2>First, a few things about you</h2>
+
+<h4>
+    Please fill in the following form with your personal details.<br />
+    These will be used to help pre-populate any relevant legal forms for you, speeding up the entire @ViewBag.ContentType transaction process.
+</h4>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Salutaion, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.Salutaion, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="address-field">
+        <h3>Optional (Current Address):</h3>
+        <h4>To help populate legal forms automatically, tell us your current residential address below.</h4>
+        <div class="form-group">
+            <div>
+                @Html.LabelFor(model => model.PrimaryAddress.AddressLine1, "Address Line 1:", new { @class = "col-md-2 control-label" })
+                @Html.TextBoxFor(model => model.PrimaryAddress.AddressLine1, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.PrimaryAddress.AddressLine2, "Address Line 2:", new { @class = "col-md-2 control-label" })
+                @Html.TextBoxFor(model => model.PrimaryAddress.AddressLine2, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.PrimaryAddress.AddressLine3, "Address Line 3:", new { @class = "col-md-2 control-label" })
+                @Html.TextBoxFor(model => model.PrimaryAddress.AddressLine3, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.PrimaryAddress.City, "City:", new { @class = "col-md-2 control-label" })
+                @Html.TextBoxFor(model => model.PrimaryAddress.City, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.PrimaryAddress.County, "County:", new { @class = "col-md-2 control-label" })
+                @Html.TextBoxFor(model => model.PrimaryAddress.County, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.PrimaryAddress.AddressPostcode, "Postcode:", new { @class = "col-md-2 control-label" })
+                @Html.TextBoxFor(model => model.PrimaryAddress.AddressPostcode, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    if (ViewBag.ContentType != "selling")
+    {
+        <div class="address-field">
+            <h3>Optional (Buying Address):</h3>
+            <h4>We can help speed up the entire transaction process by letting us know the address of the property you intend to buy.</h4>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.PurchaseAddress.AddressLine1, "Address Line 1:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.PurchaseAddress.AddressLine1, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.PurchaseAddress.AddressLine2, "Address Line 2:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.PurchaseAddress.AddressLine2, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.PurchaseAddress.AddressLine3, "Address Line 3:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.PurchaseAddress.AddressLine3, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.PurchaseAddress.City, "Town/City:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.PurchaseAddress.City, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.PurchaseAddress.County, "County:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.PurchaseAddress.County, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.PurchaseAddress.AddressPostcode, "Postcode:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.PurchaseAddress.AddressPostcode, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    }
+
+    if (ViewBag.ContentType != "buying")
+    {
+        <div class="address-field">
+            <h3>Optional (Selling Address):</h3>
+            <h4>We can help speed up the entire transaction process by letting us know the address of the property you intend to Sell.</h4>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.AddressLine1, "Address Line 1:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.SellingAddress.AddressLine1, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.AddressLine2, "Address Line 2:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.SellingAddress.AddressLine2, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.AddressLine3, "Address Line 3:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.SellingAddress.AddressLine3, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.City, "Town/City:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.SellingAddress.City, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.County, "County:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.SellingAddress.County, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SellingAddress.AddressPostcode, "Postcode:", new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(model => model.SellingAddress.AddressPostcode, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@*@using Services.Management
 @model Account
 <h1>Sign Up (it's free!)</h1>
 
@@ -132,5 +299,5 @@
         }
         <input type="submit" value="Create New Account"/>
     </fieldset>
-}
+}*@
 

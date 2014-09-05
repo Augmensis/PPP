@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace PPP.Controllers
 {
+    [RequireHttps]
     public class ErrorController : Controller
     {
         // GET: Error

@@ -11,6 +11,7 @@ using PPP.Models;
 namespace PPP.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class ManageController : Controller
     {
         public ManageController()

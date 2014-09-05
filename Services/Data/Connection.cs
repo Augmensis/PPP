@@ -53,6 +53,25 @@ namespace Services.Data
             return dt;
         }
 
+        public static void ExcecuteMySql(string cmd, object[] cmdParams)
+        {
+            var newCmd = MySQLCommandBuilder(cmd, cmdParams);
+            newCmd.Connection = OpenConnection();
+            newCmd.ExecuteNonQuery();
+            newCmd.Connection.Close();
+            newCmd.Connection.Dispose();
+            newCmd.Dispose();
+        }
+
+        public static void ExcecuteMySql(string cmd)
+        {
+            var newCmd = new MySqlCommand(cmd) {Connection = OpenConnection()};
+            newCmd.ExecuteNonQuery();
+            newCmd.Connection.Close();
+            newCmd.Connection.Dispose();
+            newCmd.Dispose();
+        }
+
         public static MySqlCommand MySQLCommandBuilder(string sql, object[] commandParams, int timeout = SQL_DEFAULT_TIMEOUT)
         {
             var cmd = new MySqlCommand(sql);
