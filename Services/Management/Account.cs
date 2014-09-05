@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Services.Data;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Services.Management
 {
@@ -36,6 +38,8 @@ namespace Services.Management
         }
 
         public int Id { get; protected set; }
+        [Required]
+        [Display(Name = "Email Address")]
         public string EmailAddress { get; protected set; }
         public string PasswordInput { get; protected set; }
         public string PasswordHash { get; protected set; }
@@ -70,7 +74,7 @@ namespace Services.Management
 
 
 
-        public Account AddNewAccount(Account acc)
+        public static Account AddNewAccount(Account acc)
         {
             try
             {
@@ -92,7 +96,7 @@ namespace Services.Management
         }
 
 
-        public Account Fetch(string email, bool withAddresses = false)
+        public static Account Fetch(string email, bool withAddresses = false)
         {
             try
             {
