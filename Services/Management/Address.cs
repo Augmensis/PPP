@@ -53,34 +53,15 @@ namespace Services.Management
                 //@AddressLine1, @AddressLine2 , @AddressLine3 , @City , @County , @Postcode , @AccountId , @AddressType
                 if (acc.PrimaryAddress != null)
                 {
-                    Connection.ExcecuteMySql(SQL_AddressSave,
-                        new object[]
-                        {
-                            acc.PrimaryAddress.AddressLine1, acc.PrimaryAddress.AddressLine2,
-                            acc.PrimaryAddress.AddressLine3, acc.PrimaryAddress.City, acc.PrimaryAddress.County,
-                            acc.PrimaryAddress.Postcode, id, enAddressType.primary
-                        });
+                    Connection.ExcecuteMySql(SQL_AddressSave,new object[]{acc.PrimaryAddress.AddressLine1, acc.PrimaryAddress.AddressLine2,acc.PrimaryAddress.AddressLine3, acc.PrimaryAddress.City, acc.PrimaryAddress.County,acc.PrimaryAddress.Postcode, id, enAddressType.primary});
                 }
                 if (acc.BuyingAddress != null)
                 {
-                    Connection.ExcecuteMySql(SQL_AddressSave,
-                        new object[]
-                        {
-                            acc.BuyingAddress.AddressLine1, acc.BuyingAddress.AddressLine2, acc.BuyingAddress.AddressLine3,
-                            acc.BuyingAddress.City, acc.BuyingAddress.County, acc.BuyingAddress.Postcode, id,
-                            enAddressType.buying
-                        });
-
+                    Connection.ExcecuteMySql(SQL_AddressSave,new object[] {acc.BuyingAddress.AddressLine1, acc.BuyingAddress.AddressLine2, acc.BuyingAddress.AddressLine3,acc.BuyingAddress.City, acc.BuyingAddress.County, acc.BuyingAddress.Postcode, id,enAddressType.buying});
                 }
                 if (acc.SellingAddress != null)
                 {
-                    Connection.ExcecuteMySql(SQL_AddressSave,
-                        new object[]
-                        {
-                            acc.SellingAddress.AddressLine1, acc.SellingAddress.AddressLine2,
-                            acc.SellingAddress.AddressLine3, acc.SellingAddress.City, acc.SellingAddress.County,
-                            acc.SellingAddress.Postcode, id, enAddressType.selling
-                        });
+                    Connection.ExcecuteMySql(SQL_AddressSave, new object[] {acc.SellingAddress.AddressLine1, acc.SellingAddress.AddressLine2,acc.SellingAddress.AddressLine3, acc.SellingAddress.City, acc.SellingAddress.County,acc.SellingAddress.Postcode, id, enAddressType.selling});
                 }
             }
             catch (Exception ex)
