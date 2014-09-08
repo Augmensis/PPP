@@ -14,11 +14,9 @@ namespace Services.Management
         public Overview()
         {
             Title = "";
-            Summary = "";
+            Description = "";
             LastUpdated = new DateTime(2000, 1, 1);
-            ProcessDictionary = new Dictionary<int, string>();
-            Notes = new List<string>();
-            ControllerName = "";
+            
         }
 
         public Overview GetOverview(string id)
@@ -27,38 +25,22 @@ namespace Services.Management
             {
                 case "buy":
                     Title = "Buying Process";
-                    Summary = "Here is a complete outline of the basic buying process, from start to finish, for a registered property in the UK. Whilst it doesn't include all of the technicalities that need to be considered, or help you fill out any forms, it is enough to show you what to expect when buying a house without using a solicitor or conveyancer.";
-                    ProcessDictionary = GetBuyingProcessOverview();
-                    LastUpdated = LastUpdated;
-                    Notes = new List<string> { "Here be a note", "and another one you scurvey dog!" };
-                    ControllerName = "buying";
+                    Description = "Here is a complete outline of the basic buying process, from start to finish, for a registered property in the UK. Whilst it doesn't include all of the technicalities that need to be considered, or help you fill out any forms, it is enough to show you what to expect when buying a house without using a solicitor or conveyancer.";
                     break;
 
                 case "sell":
                     Title = "Selling Process";
-                    Summary = "Here is a complete outline of the basic selling process, from start to finish, for a registered property in the UK. Whilst it doesn't include all of the technicalities that need to be considered, or help you fill out any forms, it is enough to show you what to expect when selling a house without using a solicitor or estate agent.";
-                    ProcessDictionary = GetSellingProcessOverview();
-                    LastUpdated = LastUpdated;
-                    Notes = new List<string> { "Here be a note", "and another one you scurvey dog!" };
-                    ControllerName = "selling";
+                    Description = "Here is a complete outline of the basic selling process, from start to finish, for a registered property in the UK. Whilst it doesn't include all of the technicalities that need to be considered, or help you fill out any forms, it is enough to show you what to expect when selling a house without using a solicitor or estate agent.";
                     break;
 
                 case "chain":
                     Title = "Buying & Selling Within a Chain";
-                    Summary = "Here is a complete outline of the basic processes involved when buying and selling a property within a chain. Whilst it doesn't include all of the technicalities that could arise, or help you fill out any forms, it is enough to show you what to expect when acting as your own legal representative within a property buying & selling chain.";
-                    ProcessDictionary = GetChainProcessOverview();
-                    LastUpdated = LastUpdated;
-                    Notes = new List<string> { "Here be a note", "and another one you scurvey dog!" };
-                    ControllerName = "chain";
+                    Description = "Here is a complete outline of the basic processes involved when buying and selling a property within a chain. Whilst it doesn't include all of the technicalities that could arise, or help you fill out any forms, it is enough to show you what to expect when acting as your own legal representative within a property buying & selling chain.";
                     break;
 
                 default:
                     Title = "Selling Process";
-                    Summary = "Here is a complete outline of the basic selling process, from start to finish, for a registered property in the UK. Whilst it doesn't include all of the technicalities that need to be considered, or help you fill out any forms, it is enough to show you what to expect when selling a house without using a solicitor or estate agent.";
-                    ProcessDictionary = GetSellingProcessOverview();
-                    LastUpdated = LastUpdated;
-                    Notes = new List<string> { "Here be a note", "and another one you scurvey dog!" };
-                    ControllerName = "selling";
+                    Description = "Here is a complete outline of the basic selling process, from start to finish, for a registered property in the UK. Whilst it doesn't include all of the technicalities that need to be considered, or help you fill out any forms, it is enough to show you what to expect when selling a house without using a solicitor or estate agent.";
                     break;
             }
             return this;

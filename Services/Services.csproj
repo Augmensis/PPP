@@ -55,8 +55,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Management\Buyer.cs" />
+    <Compile Include="Management\Caveat.cs" />
     <Compile Include="Management\Chain.cs" />
     <Compile Include="Management\Content.cs" />
+    <Compile Include="Management\LegalDoc.cs" />
     <Compile Include="Management\Overview.cs" />
     <Compile Include="Management\Process.cs" />
     <Compile Include="Management\Product.cs" />

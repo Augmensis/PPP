@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
@@ -26,7 +27,7 @@ namespace Services.Management
         protected const string SQL_ConnectGetChainNotes = "Select Position, title, lastupdated from citizenDB.Contents where ControllerName = 'chain' and type = 4 order by Position asc;";
 
 
-        public enum enControllerTypes{
+        public enum enProductType{
             Nothing = 0,
             Buying = 1,
             Selling = 2,
@@ -42,21 +43,36 @@ namespace Services.Management
             Tip = 3
         }
 
+        public int Id { get; set; }
+        public int ProductId { get; set; }
         public string Title { get; set; }
-        public string Summary { get; set; }
+        public string Description { get; set; }
+        public int Position { get; set; }
         public DateTime LastUpdated { get; set; }
-        public Dictionary<int, string> ProcessDictionary { get; set; }
-        public List<String> Notes { get; set; }
-        public string ControllerName { get;  set; }
+        public enContentType ContentType { get; set; }
+        public enProductType ProductType { get; set; }
+
 
 #region Admin Inserts
 
-        public static List<Content> FetchProductOverview(int id)
+        public static List<Overview> FetchProductOverview(int productId)
         {
-            
+            var dt = Connection.GetMySqlTable(SQL_GetProductOverview, new object[] {productId});
+
+            foreach (DataRow ov in dt.AsEnumerable())
+            {
+                var overveiw = new Overview();
+                overveiw.Title = (string) ov["Title"];
+                overveiw.Description = (string) ov["Title"];
+                overveiw.ProductId = Convert.ToInt32(ov["Title"].ToString());
+                overveiw.Position = Convert.ToInt32(ov["Title"].ToString());
+                overveiw.LastUpdated = Convert.ToDateTime(ov["Title"].ToString());
+                overveiw.ContentType = (enContentType) Convert.ToInt32(ov["Title"].ToString());
+                overveiw.ProductType = (enProductType) Convert.ToInt32(ov["Title"].ToString());
+            }
         }
 
-        public static List<Content> FetchProductProcess(int id)
+        public static List<Content> FetchProductProcess(int productId)
         {
 
         }
@@ -84,12 +100,12 @@ namespace Services.Management
 
             foreach (var step in tempDictionary)
             {
-                InsertToContentTable(enControllerTypes.Selling, step.Value, "", "Selling", DateTime.UtcNow, "Overview", step.Key);
+                InsertToContentTable(enProductType.Selling, step.Value, "", "Selling", DateTime.UtcNow, "Overview", step.Key);
             }
 
         }
 
-        protected static void InsertToContentTable(enControllerTypes type, string title, string summary, string controllerName, DateTime date, string viewName, int position)
+        protected static void InsertToContentTable(enProductType type, string title, string summary, string controllerName, DateTime date, string viewName, int position)
         {
             try
             {

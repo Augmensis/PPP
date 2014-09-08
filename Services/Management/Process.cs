@@ -11,11 +11,9 @@ namespace Services.Management
         public Process()
         {
             Title = "";
-            Summary = "";
+            Description = "";
             LastUpdated = new DateTime(2000, 1, 1);
-            ProcessDictionary = new Dictionary<int, string>();
-            Notes = new List<string>();
-            ControllerName = "";
+            
         }
     }
 }
