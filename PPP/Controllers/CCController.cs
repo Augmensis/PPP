@@ -13,16 +13,28 @@ namespace PPP.Controllers
         // GET: CC
         public ActionResult Overview()
         {
+            if (!User.IsInRole("Controller"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
         public ActionResult Users()
         {
+            if (!User.IsInRole("Controller"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
         public ActionResult Content()
         {
+            if (!User.IsInRole("Controller"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
     }
