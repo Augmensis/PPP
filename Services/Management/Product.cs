@@ -53,8 +53,8 @@ namespace Services.Management
             prod.Price = Convert.ToDouble(dt.Columns["Name"].ToString());
             prod.CreationDate = dt.Columns["CreationDate"].ToString();
             prod.LastUpdated = dt.Columns["LastUpdated"].ToString();
-            prod.Overview = Content.Overview.FetchProductOverview(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
-            prod.Process = Content.Process.FetchProductProcess(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
+            prod.Overview = Content.FetchProductOverview(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
+            prod.Process = Content.FetchProductProcess(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
 
             return prod;
         }
@@ -66,7 +66,7 @@ namespace Services.Management
             var overviewList = new List<Content>();
             foreach (DataRow overviewItem in dt.AsEnumerable())
             {
-                var overview = new Content.Overview();
+                var overview = new Overview();
                 overview.ControllerName = (string)overviewItem["ControllerName"];
             }
 

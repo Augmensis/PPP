@@ -27,11 +27,11 @@ namespace Services.Management
 
 
         public enum enControllerTypes{
-            nothing = 0,
-            buying = 1,
-            selling = 2,
-            chain = 3,
-            notes = 4
+            Nothing = 0,
+            Buying = 1,
+            Selling = 2,
+            Chain = 3,
+            Notes = 4
         }
 
         public enum enContentType
@@ -42,16 +42,24 @@ namespace Services.Management
             Tip = 3
         }
 
-        public string Title { get; protected set; }
-        public string Summary { get; protected set; }
-        public DateTime LastUpdated { get; protected set; }
-        public Dictionary<int, string> ProcessDictionary { get; protected set; }
-        public List<String> Notes { get; protected set; }
-        public string ControllerName { get; protected set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public DateTime LastUpdated { get; set; }
+        public Dictionary<int, string> ProcessDictionary { get; set; }
+        public List<String> Notes { get; set; }
+        public string ControllerName { get;  set; }
 
 #region Admin Inserts
 
+        public static List<Content> FetchProductOverview(int id)
+        {
+            
+        }
 
+        public static List<Content> FetchProductProcess(int id)
+        {
+
+        }
 
         public static void AddOverviewToSeller()
         {
@@ -76,7 +84,7 @@ namespace Services.Management
 
             foreach (var step in tempDictionary)
             {
-                InsertToContentTable(enControllerTypes.selling, step.Value, "", "Selling", DateTime.UtcNow, "Overview", step.Key);
+                InsertToContentTable(enControllerTypes.Selling, step.Value, "", "Selling", DateTime.UtcNow, "Overview", step.Key);
             }
 
         }
