@@ -1,7 +1,11 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
+using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +41,8 @@ namespace Services.Management
             Other
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; protected set; }
 
         [Required]
@@ -54,13 +60,35 @@ namespace Services.Management
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string CreatedOn { get; protected set; }
+        [Required]
+        [Display(Name = "Title")]
+        [Column("Salutation", TypeName = "VARCHAR")]
         public enSalutaion Salutation { get; protected set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        [Column("FirstName", TypeName = "VARCHAR")]
         public string FirstName { get; protected set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        [Column("LastName", TypeName = "VARCHAR")]
         public string LastName { get; protected set; }
+
+        [Display(Name = "Account Status")]
+        [Column("AccountStatus", TypeName = "INT")]
         public enAccountSatus AccountStatus { get; protected set; }
+
+        public string CreatedOn { get; protected set; }
+
+        [ForeignKey("PrimaryAddressId")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int PrimaryAddressId { get; protected set; }
+        [ForeignKey("SellingAddressId")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SellingAddressId { get; protected set; }
+        [ForeignKey("BuyingAddressId")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int BuyingAddressId { get; protected set; }
         public Address PrimaryAddress { get; protected set; }
         public Address SellingAddress { get; protected set; }
