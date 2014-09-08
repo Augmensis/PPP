@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace PPP.Controllers
 {
+    // Command and Control Controller
     [RequireHttps]
     public class CCController : Controller
     {
