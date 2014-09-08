@@ -17,7 +17,7 @@ namespace Services.Data
         //private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=citizenDB;Convert Zero Datetime=True;Allow Zero Datetime=True;";
         private const int SQL_DEFAULT_TIMEOUT = 60;
 
-        private static string BASE_CONNECTION { get; set; }
+        //private static string BASE_CONNECTION { get; set; }
 
         private static string GetBaseConnection()
         {
