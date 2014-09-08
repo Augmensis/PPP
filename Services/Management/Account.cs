@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Services.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace Services.Management
 {
@@ -15,6 +16,7 @@ namespace Services.Management
         private const string SQL_AccountSave = "UPDATE citizenDB.Accounts (Salutation,FirstName,LastName,AccountStatus,EmailAddress,PasswordHash,CreatedOn,LastUpdated,PrimaryAddressId,SellingAddressId,BuyingAddressId)VALUES( @Salutation , @FirstName , @LastName , @AccountStatus , @EmailAddress , @PasswordHash , @CreatedOn , @LastUpdated, @PrimaryAddressId , @SellingAddressId , @BuyingAddressId );";
         private const string SQL_NewAccountSave = "INSERT INTO citizenDB.Accounts (Salutation,FirstName,LastName,AccountStatus,EmailAddress,PasswordHash,CreatedOn,LastUpdated)VALUES( @Salutation , @FirstName , @LastName , @AccountStatus , @EmailAddress , @PasswordHash , @CreatedOn , @LastUpdated );";
 
+#region Properties
         public enum enSalutaion
         {
             Mr,
@@ -36,9 +38,22 @@ namespace Services.Management
         }
 
         public int Id { get; protected set; }
-        public string EmailAddress { get; protected set; }
-        public string PasswordInput { get; protected set; }
-        public string PasswordHash { get; protected set; }
+
+        [Required]
+        [Display(Name = "Email Address")]
+        public string EmailAddress { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
         public string CreatedOn { get; protected set; }
         public enSalutaion Salutation { get; protected set; }
         public string FirstName { get; protected set; }
@@ -50,14 +65,16 @@ namespace Services.Management
         public Address PrimaryAddress { get; protected set; }
         public Address SellingAddress { get; protected set; }
         public Address BuyingAddress { get; protected set; }
-        public List<Address> ObsoleteAddresses { get; protected set; } 
+        public List<Address> ObsoleteAddresses { get; protected set; }
 
+#endregion Properties
 
         public Account()
         {
             Id = 0;
             EmailAddress = "";
-            PasswordHash = "";
+            Password = "";
+            ConfirmPassword = "";
             CreatedOn  = "";
             Salutation = enSalutaion.Mr;
             FirstName  = "";
@@ -70,12 +87,12 @@ namespace Services.Management
 
 
 
-        public Account AddNewAccount(Account acc)
+        public static Account AddNewAccount(Account acc)
         {
             try
             {
                 //@Salutation , @FirstName , @LastName , @AccountStatus , @EmailAddress , @PasswordHash , @CreatedOn , @LastUpdated
-                Connection.ExcecuteMySql(SQL_NewAccountSave, new object[] {acc.Salutation, acc.FirstName, acc.LastName, acc.AccountStatus, acc.EmailAddress, acc.PasswordHash, acc.CreatedOn, DateTime.Now.ToString()});
+                Connection.ExcecuteMySql(SQL_NewAccountSave, new object[] {acc.Salutation, acc.FirstName, acc.LastName, acc.AccountStatus, acc.EmailAddress, acc.Password, acc.CreatedOn, DateTime.Now.ToString()});
                 
                 if (acc.PrimaryAddress != null || acc.SellingAddress != null || acc.BuyingAddress != null)
                 {
@@ -92,7 +109,7 @@ namespace Services.Management
         }
 
 
-        public Account Fetch(string email, bool withAddresses = false)
+        public static Account Fetch(string email, bool withAddresses = false)
         {
             try
             {

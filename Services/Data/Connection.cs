@@ -14,13 +14,30 @@ namespace Services.Data
     class Connection
     {
         private static MySql.Data.MySqlClient.MySqlConnection conn;
-        private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=citizenDB;Convert Zero Datetime=True;Allow Zero Datetime=True;";
+        //private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=citizenDB;Convert Zero Datetime=True;Allow Zero Datetime=True;";
         private const int SQL_DEFAULT_TIMEOUT = 60;
 
-        public static MySqlConnection OpenConnection(string connectionString = BASE_CONNECTION)
+        private static string BASE_CONNECTION { get; set; }
+
+        private static string GetBaseConnection()
+        {
+            if (Environment.MachineName == "THESIUS")
+            {
+                return "server=192.168.1.80;uid=root;pwd=xen0m0rph187;database=citizenDB;Convert Zero Datetime=True;Allow Zero Datetime=True;";
+            }
+            return "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=citizenDB;Convert Zero Datetime=True;Allow Zero Datetime=True;";
+        }
+        
+
+
+        public static MySqlConnection OpenConnection(string connectionString = "")
         {
             try
             {
+                if (string.IsNullOrEmpty(connectionString))
+                {
+                    connectionString = GetBaseConnection();
+                }
                 conn = new MySqlConnection { ConnectionString = connectionString };
                 conn.Open();
                 return conn;
@@ -28,7 +45,7 @@ namespace Services.Data
             catch (MySqlException ex)
             {
                 //Email connection toubles to dev
-                throw new Exception("Connection Fail:", ex);
+                throw new Exception(string.Format("Connection Fail:{0}", ex.Message));
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -20,8 +21,7 @@ namespace PPP.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        public ApplicationDbContext() : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
@@ -30,4 +30,18 @@ namespace PPP.Models
             return new ApplicationDbContext();
         }
     }
+
+    public class LocalDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public LocalDbContext()
+            : base("LocalConnection", throwIfV1Schema: false)
+        {
+        }
+
+        public static LocalDbContext Create()
+        {
+            return new LocalDbContext();
+        }
+    }
+
 }
