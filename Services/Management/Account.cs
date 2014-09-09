@@ -43,7 +43,7 @@ namespace Services.Management
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; protected set; }
+        public int Id { get;  set; }
 
         [Required]
         [Display(Name = "Email Address")]
@@ -53,7 +53,7 @@ namespace Services.Management
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public static string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
@@ -63,37 +63,37 @@ namespace Services.Management
         [Required]
         [Display(Name = "Title")]
         [Column("Salutation", TypeName = "VARCHAR")]
-        public enSalutaion Salutation { get; protected set; }
+        public enSalutaion Salutation { get;  set; }
 
         [Required]
         [Display(Name = "First Name")]
         [Column("FirstName", TypeName = "VARCHAR")]
-        public string FirstName { get; protected set; }
+        public string FirstName { get;  set; }
 
         [Required]
         [Display(Name = "Last Name")]
         [Column("LastName", TypeName = "VARCHAR")]
-        public string LastName { get; protected set; }
+        public string LastName { get;  set; }
 
         [Display(Name = "Account Status")]
         [Column("AccountStatus", TypeName = "INT")]
-        public enAccountSatus AccountStatus { get; protected set; }
+        public enAccountSatus AccountStatus { get;  set; }
 
-        public string CreatedOn { get; protected set; }
+        public string CreatedOn { get;  set; }
 
         [ForeignKey("PrimaryAddressId")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int PrimaryAddressId { get; protected set; }
+        public int PrimaryAddressId { get;  set; }
         [ForeignKey("SellingAddressId")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int SellingAddressId { get; protected set; }
+        public int SellingAddressId { get;  set; }
         [ForeignKey("BuyingAddressId")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int BuyingAddressId { get; protected set; }
-        public Address PrimaryAddress { get; protected set; }
-        public Address SellingAddress { get; protected set; }
-        public Address BuyingAddress { get; protected set; }
-        public List<Address> ObsoleteAddresses { get; protected set; }
+        public int BuyingAddressId { get;  set; }
+        public Address PrimaryAddress { get;  set; }
+        public Address SellingAddress { get;  set; }
+        public Address BuyingAddress { get;  set; }
+        public List<Address> ObsoleteAddresses { get;  set; }
 
 #endregion Properties
 
@@ -113,7 +113,21 @@ namespace Services.Management
             BuyingAddress = null;
         }
 
-
+        public Account (Account account)
+        {
+            Id = account.Id;
+            EmailAddress = account.EmailAddress;
+            Password = account.Password;
+            ConfirmPassword = account.ConfirmPassword;
+            CreatedOn = account.CreatedOn;
+            Salutation = account.Salutation;
+            FirstName = account.FirstName;
+            LastName = account.LastName;
+            AccountStatus = account.AccountStatus;
+            PrimaryAddress = account.PrimaryAddress;
+            SellingAddress = account.SellingAddress;
+            BuyingAddress = account.BuyingAddress;
+        }
 
         public static Account AddNewAccount(Account acc)
         {

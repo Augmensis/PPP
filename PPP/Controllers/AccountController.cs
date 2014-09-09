@@ -156,6 +156,7 @@ namespace PPP.Controllers
         {
             if (ModelState.IsValid)
             {
+                //var mod = new Services.Management.Account(model);
                 var user = new ApplicationUser { UserName = model.EmailAddress, Email = model.EmailAddress };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 var acc = Account.AddNewAccount(model);
