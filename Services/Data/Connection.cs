@@ -44,7 +44,7 @@ namespace Services.Data
             }
             catch (MySqlException ex)
             {
-                //Email connection toubles to dev
+                //Email connection troubles to dev
                 throw new Exception(string.Format("Connection Fail:{0}", ex.Message));
             }
         }
