@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Services.Management
 {
-    class Buyer : Account
+    class Note : Process
     {
     }
 }

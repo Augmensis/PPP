@@ -9,7 +9,7 @@ namespace PPP.Controllers
         // GET: Shared
         public ActionResult Overview(string id = "")
         {
-            return View(ViewData["content"] = new Content.Overview().GetOverview(id));
+            return View(ViewData["content"]) ;//= new Content.Overview().GetOverview(id));
         }
 
         [HttpGet]

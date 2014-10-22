@@ -55,26 +55,26 @@ namespace Services.Management
 
 #region Admin Inserts
 
-        public static List<Overview> FetchProductOverview(int productId)
-        {
-            var dt = Connection.GetMySqlTable(SQL_GetProductOverview, new object[] {productId});
+        //public static List<Overview> FetchProductOverview(int productId)
+        //{
+        //    var dt = Connection.GetMySqlTable(SQL_GetProductOverview, new object[] {productId});
 
-            foreach (DataRow ov in dt.AsEnumerable())
-            {
-                var overveiw = new Overview();
-                overveiw.Title = (string) ov["Title"];
-                overveiw.Description = (string) ov["Title"];
-                overveiw.ProductId = Convert.ToInt32(ov["Title"].ToString());
-                overveiw.Position = Convert.ToInt32(ov["Title"].ToString());
-                overveiw.LastUpdated = Convert.ToDateTime(ov["Title"].ToString());
-                overveiw.ContentType = (enContentType) Convert.ToInt32(ov["Title"].ToString());
-                overveiw.ProductType = (enProductType) Convert.ToInt32(ov["Title"].ToString());
-            }
-        }
+        //    foreach (DataRow ov in dt.AsEnumerable())
+        //    {
+        //        var overveiw = new Overview();
+        //        overveiw.Title = (string) ov["Title"];
+        //        overveiw.Description = (string) ov["Title"];
+        //        overveiw.ProductId = Convert.ToInt32(ov["Title"].ToString());
+        //        overveiw.Position = Convert.ToInt32(ov["Title"].ToString());
+        //        overveiw.LastUpdated = Convert.ToDateTime(ov["Title"].ToString());
+        //        overveiw.ContentType = (enContentType) Convert.ToInt32(ov["Title"].ToString());
+        //        overveiw.ProductType = (enProductType) Convert.ToInt32(ov["Title"].ToString());
+        //    }
+        //}
 
         public static List<Content> FetchProductProcess(int productId)
         {
-
+            return new List<Content>();
         }
 
         public static void AddOverviewToSeller()

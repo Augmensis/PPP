@@ -27,7 +27,6 @@ namespace Services.Management
 
         public string CreationDate { get; set; }
         public string LastUpdated { get; set; }
-        public List<Content> Overview  { get; set; }
         public List<Content> Process  { get; set; }
 
 
@@ -38,7 +37,6 @@ namespace Services.Management
             Price = 0.0d;
             CreationDate = "";
             LastUpdated = "";
-            Overview = new List<Content>();
             Process = new List<Content>();
         }
 
@@ -53,29 +51,28 @@ namespace Services.Management
             prod.Price = Convert.ToDouble(dt.Columns["Name"].ToString());
             prod.CreationDate = dt.Columns["CreationDate"].ToString();
             prod.LastUpdated = dt.Columns["LastUpdated"].ToString();
-            //prod.Overview = Content.FetchProductOverview(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
             prod.Process = Content.FetchProductProcess(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
 
             return prod;
         }
 
-        public static List<Content> FetchOverview(int productId)
-        {
-            var dt = Connection.GetMySqlTable("Select * from Content where ProductId = @productId and ContentType = 0;", new object[] {productId});
+        //public static List<Content> FetchOverview(int productId)
+        //{
+        //    var dt = Connection.GetMySqlTable("Select * from Content where ProductId = @productId and ContentType = 0;", new object[] {productId});
 
-            var overviewList = new List<Content>();
-            foreach (DataRow overviewItem in dt.AsEnumerable())
-            {
-                var overview = new Overview();
-                overview.ControllerName = (string)overviewItem["ControllerName"];
-            }
+        //    var overviewList = new List<Content>();
+        //    foreach (DataRow overviewItem in dt.AsEnumerable())
+        //    {
+        //        var overview = new Overview();
+        //        overview.ControllerName = (string)overviewItem["ControllerName"];
+        //    }
 
 
-        }
+        //}
 
         public static List<Content> FetchProcesses(int productId)
         {
-
+            return new List<Content>();
         }
 
         public static void Create(Product product)

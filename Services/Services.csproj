@@ -54,15 +54,12 @@
     <Compile Include="Management\Address.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Management\Buyer.cs" />
     <Compile Include="Management\Caveat.cs" />
-    <Compile Include="Management\Chain.cs" />
     <Compile Include="Management\Content.cs" />
     <Compile Include="Management\LegalDoc.cs" />
-    <Compile Include="Management\Overview.cs" />
+    <Compile Include="Management\Note.cs" />
     <Compile Include="Management\Process.cs" />
     <Compile Include="Management\Product.cs" />
-    <Compile Include="Management\Seller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
