@@ -44,7 +44,7 @@ namespace PPP
         {
             ApplicationUserManager manager;
 
-            if(Environment.MachineName == "THESIUS")
+            if(Environment.MachineName == "THESIUS" || Environment.MachineName == "DEREK-PC")
             {
                manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<LocalDbContext>()));
             }

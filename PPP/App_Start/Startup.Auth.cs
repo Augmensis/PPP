@@ -15,7 +15,7 @@ namespace PPP
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            if (Environment.MachineName == "THESIUS")
+            if (Environment.MachineName == "THESIUS" || Environment.MachineName == "DEREK-PC")
             {
                 app.CreatePerOwinContext(LocalDbContext.Create);
             }
