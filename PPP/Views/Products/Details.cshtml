@@ -1,0 +1,38 @@
+﻿@model Services.Management.Product
+@*@{ var counter = 0; }*@
+
+@section Header{
+    <div class="diylaw-header" id="content">
+        <div class="container">
+            <h1>@Model.Name</h1>
+
+            <h2>@Model.Description</h2>
+
+            <h3>Here is an overview of what to expect during the process:</h3>
+        </div>
+    </div>
+
+}
+<div>
+    <ol>
+
+        @foreach (var process in Model.Processes.Where(d => !d.IsDeleted).AsEnumerable().OrderBy(o => o.Position))
+        {
+            //{ counter++; }
+            <li class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">@*@counter.ToString())*@ @process.Title</div>
+                </div>
+            </li>
+        }
+    </ol>
+    <p>It really can be as straight forward as that!</p>
+    <p>
+        Whilst there will be some caveats and points to note, DIY Law will help guide you through them.
+        In some rare and extreme circumstances, you may require legal advice which we will tell you about in the unlikely event of it happening.
+    </p>
+
+    <p>[SALES BLURB]</p>
+
+    @Html.ActionLink("Sign Up Now", "Register", "Account", new { @class = "btn btn-info" }, null)
+</div>

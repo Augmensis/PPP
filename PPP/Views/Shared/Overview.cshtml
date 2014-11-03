@@ -1,0 +1,28 @@
+﻿@{
+    var data = (Services.Management.Content.Overview)ViewData["content"];
+}
+
+<h2>@data.Title Overview</h2>
+
+<h3>@data.Summary</h3>
+
+<h4>Last Updated: @data.LastUpdated</h4>
+
+<h3>High Level Process</h3>
+<ol>
+    @foreach (var row in data.ProcessDictionary.OrderBy(k => k.Key))
+    {
+        <li>@row.Value</li>
+    }
+</ol>
+
+<h3>Important Notes:</h3>
+<ul>
+    @foreach (var row in data.Notes)
+    {
+        <li>@row</li>
+    }
+</ul>
+
+<p><a class="btn btn-default" href="../Signup/@data.ControllerName">Buy & Sell A Property</a></p>
+
