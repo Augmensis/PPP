@@ -35,11 +35,11 @@ namespace Services.Management
         public string TransactionCode { get; protected set; }
         public string VoucherCode { get; protected set; }
         public enPaymentStatus PaymentStatus { get; protected set; }
-        
-        public DateTime CreatedOn { get; set; }
-        public DateTime DateCompleted { get; set; }
-        public DateTime LastUpdated { get; set; }
-        public bool IsDeleted { get; set; }
+
+        public DateTime CreatedOn { get; protected set; }
+        public DateTime DateCompleted { get; protected set; }
+        public DateTime LastUpdated { get; protected set; }
+        public bool IsDeleted { get; protected set; }
 
         public Payment()
         {

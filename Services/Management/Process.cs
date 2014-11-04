@@ -17,16 +17,17 @@ namespace Services.Management
     public class Process 
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
-        public int ProductId { get; set; }
-        public int Position { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public ProcessType ProcessType { get; set; }
+        public int Id { get; protected set; }
+        public int ProductId { get; protected set; }
+        public int Position { get; protected set; }
+        public string Title { get; protected set; }
+        public string Description { get; protected set; }
+        public List<String> Notes { get; protected set; }
+        public ProcessType ProcessType { get; protected set; }
 
-        public DateTime CreationDate { get; set; }
-        public DateTime LastUpdated { get; set; }
-        public bool IsDeleted { get; set; }
+        public DateTime CreationDate { get; protected set; }
+        public DateTime LastUpdated { get; protected set; }
+        public bool IsDeleted { get; protected set; }
 
 
         public Process()

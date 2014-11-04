@@ -14,22 +14,22 @@ namespace Services.Management
     public class Product
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int Id { get; protected set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; protected set; }
 
         [Required]
-        public string Description  { get; set; }
+        public string Description { get; protected set; }
 
         [Required]
-        public double Price { get; set; }
-        public double EstimatedTotalLegalCost { get; set; }
+        public double Price { get; protected set; }
+        public double EstimatedTotalLegalCost { get; protected set; }
 
-        public string CreationDate { get; set; }
-        public string LastUpdated { get; set; }
-        public List<Process> Processes  { get; set; }
-        public bool IsDeleted { get; set; }
+        public string CreationDate { get; protected set; }
+        public string LastUpdated { get; protected set; }
+        public List<Process> Processes { get; protected set; }
+        public bool IsDeleted { get; protected set; }
 
         public Product()
         {
