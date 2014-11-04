@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Services.Management
 {
-    class Note : Process
+    public class Note
     {
+        public int Id { get; protected set; }
+
+        public Note()
+        {
+            Id = 0;
+        }
+
+        public static List<Note> Fetch(int noteId)
+        {
+            return new List<Note>();
+        }
     }
 }

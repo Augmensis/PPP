@@ -179,5 +179,15 @@ namespace Services.Management
             }
             return false;
         }
+
+        //public bool GoToPub(bool pubExists, bool beerExists)
+        //{
+        //    while (pubExists || beerExists)
+        //    {
+        //        Console.WriteLine("Might as well go to the pub");
+        //        GoToPub(pubExists, beerExists);
+        //    }
+        //    return true;
+        //}
     }
 }
