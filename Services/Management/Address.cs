@@ -96,5 +96,18 @@ namespace Services.Management
             return addressList;
         }
 
+        public bool Save(Address acc)
+        {
+            try
+            {
+                Connection.ExcecuteMySql(SQL_AddressSave);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(String.Format("Error trying to save Address changes: {0}", ex.Message));
+            }
+            return false;
+        }
+
     }
 }

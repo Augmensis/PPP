@@ -41,7 +41,6 @@ namespace Services.Management
         {
             try
             {
-                // Select * from citizenDB.Processes where ProductId = @productId
                 var dt = Connection.GetMySqlTable(SQL_NoteFetchAll, new object[] { productId });
 
                 var noteList = new List<Note>();
@@ -67,7 +66,7 @@ namespace Services.Management
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Error with Fetching all Processes: {0}", ex.Message));
+                throw new Exception(String.Format("Error with Fetching all Notes: {0}", ex.Message));
             }
 
         }
@@ -95,7 +94,7 @@ namespace Services.Management
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Error with Fetching all Processes: {0}", ex.Message));
+                throw new Exception(String.Format("Error with Fetching one Note: {0}", ex.Message));
             }
 
         }
@@ -108,7 +107,7 @@ namespace Services.Management
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Error trying to save Process changes: {0}", ex.Message));
+                throw new Exception(String.Format("Error trying to save Note changes: {0}", ex.Message));
             }
             return false;
         }
