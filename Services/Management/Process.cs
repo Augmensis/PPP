@@ -19,9 +19,8 @@ namespace Services.Management
     public class Process
     {
         private const string SQL_ProcessSave = "";
-        private const string SQL_ProcessFetchAll = "Select * from citizenDB.Processes where ProductId = @productId and processId = @processId ;";
-        private const string SQL_ProcessFetchOne = "Select * from citizenDB.Processes where ProductId = @productId ;";
-
+        private const string SQL_ProcessFetchAll = "Select * from citizenDB.Processes where ProductId = @productId ;";
+        private const string SQL_ProcessFetchOne = "Select * from citizenDB.Processes where ProductId = @productId and processId = @processId ;";
 
         public int Id { get; protected set; }
         public int ProductId { get; protected set; }
