@@ -15,6 +15,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Services.Management
 {
+    public enum enAccountSatus
+    {
+        NonPaying = 0,
+        Paying = 1
+    }
+
     public class Account
     {
         private const string SQL_AccountSave = "UPDATE citizenDB.Accounts (Salutation,FirstName,LastName,AccountStatus,EmailAddress,PasswordHash,CreatedOn,LastUpdated,PrimaryAddressId,SellingAddressId,BuyingAddressId)VALUES( @Salutation , @FirstName , @LastName , @AccountStatus , @EmailAddress , @PasswordHash , @CreatedOn , @LastUpdated, @PrimaryAddressId , @SellingAddressId , @BuyingAddressId );";
@@ -22,69 +28,28 @@ namespace Services.Management
 
 #region Properties
 
-        public enum enAccountSatus
-        {
-            Buyer,
-            Seller,
-            Chain,
-            Other
-        }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get;  set; }
-
-        [Required]
-        [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        [Display(Name = "Title")]
-        [Column("Salutation", TypeName = "VARCHAR")]
         public string Salutation { get;  set; }
-
-        [Required]
-        [Display(Name = "First Name")]
-        [Column("FirstName", TypeName = "VARCHAR")]
         public string FirstName { get;  set; }
-
-        [Required]
-        [Display(Name = "Last Name")]
-        [Column("LastName", TypeName = "VARCHAR")]
         public string LastName { get;  set; }
-
-        [Display(Name = "Account Status")]
-        [Column("AccountStatus", TypeName = "INT")]
         public enAccountSatus AccountStatus { get;  set; }
+        public List<Payment> Payments { get; set; }
 
-        public DateTime CreatedOn { get;  set; }
-        public DateTime LastUpdated { get; set; }
-        public bool IsDeleted { get;  set; }
-        
-        [ForeignKey("PrimaryAddressId")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int PrimaryAddressId { get;  set; }
-        [ForeignKey("SellingAddressId")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SellingAddressId { get;  set; }
-        [ForeignKey("BuyingAddressId")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int BuyingAddressId { get;  set; }
-        public Address PrimaryAddress { get;  set; }
-        public Address SellingAddress { get;  set; }
-        public Address BuyingAddress { get;  set; }
+        public Address PrimaryAddress { get; set; }
+        public Address SellingAddress { get; set; }
+        public Address BuyingAddress { get; set; }
         public List<Address> ObsoleteAddresses { get;  set; }
+
+        public DateTime CreatedOn { get; set; }
+        public DateTime LastUpdated { get; set; }
+        public bool IsDeleted { get; set; }
 
 #endregion Properties
 
@@ -97,7 +62,10 @@ namespace Services.Management
             Salutation = "";
             FirstName  = "";
             LastName = "";
-            AccountStatus = enAccountSatus.Seller;
+            AccountStatus = enAccountSatus.NonPaying;
+            PrimaryAddressId = 0;
+            SellingAddressId = 0;
+            BuyingAddressId = 0;
             PrimaryAddress = null;
             SellingAddress = null;
             BuyingAddress = null;
@@ -117,6 +85,9 @@ namespace Services.Management
             FirstName = account.FirstName;
             LastName = account.LastName;
             AccountStatus = account.AccountStatus;
+            PrimaryAddressId = account.PrimaryAddressId;
+            SellingAddressId = account.SellingAddressId;
+            BuyingAddressId = account.BuyingAddressId;
             PrimaryAddress = account.PrimaryAddress;
             SellingAddress = account.SellingAddress;
             BuyingAddress = account.BuyingAddress;
@@ -132,7 +103,7 @@ namespace Services.Management
                 //@Salutation , @FirstName , @LastName , @AccountStatus , @EmailAddress , @PasswordHash , @CreatedOn , @LastUpdated
                 Connection.ExcecuteMySql(SQL_NewAccountSave, new object[] {acc.Salutation, acc.FirstName, acc.LastName, acc.AccountStatus, acc.EmailAddress, acc.Password, acc.CreatedOn, DateTime.Now.ToString()});
                 
-                if (acc.PrimaryAddress != null || acc.SellingAddress != null || acc.BuyingAddress != null)
+                if (acc.PrimaryAddressId != 0 || acc.SellingAddressId != 0 || acc.BuyingAddressId != 0)
                 {
                     var id = Fetch(acc.EmailAddress).Id;
                     Address.AddNewAddresses(acc, id);

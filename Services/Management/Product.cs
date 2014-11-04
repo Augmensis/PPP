@@ -24,6 +24,7 @@ namespace Services.Management
 
         [Required]
         public double Price { get; set; }
+        public double EstimatedTotalLegalCost { get; set; }
 
         public string CreationDate { get; set; }
         public string LastUpdated { get; set; }

@@ -24,13 +24,14 @@ namespace Services.Management
         }
 
         public int Id { get; protected set; }
+        public int AccountId { get; protected set; }
         public string AddressLine1 { get; protected set; }
         public string AddressLine2 { get; protected set; }
         public string AddressLine3 { get; protected set; }
         public string City { get; protected set; }
         public string County { get; protected set; }
         public string Postcode { get; protected set; }
-        public int AccountId { get; protected set; }
+        
         public enAddressType AddressType { get; protected set; }
 
         public Address()
