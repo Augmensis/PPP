@@ -52,7 +52,7 @@ namespace Services.Management
                     {
                         Id = process.Field<int>("Id"),
                         ProductId = process.Field<int>("ProductId"),
-                        ProcessId = process.Field<int>("ProductId"),
+                        ProcessId = process.Field<int>("PrcessId"),
                         Position = process.Field<int>("Position"),
                         Title = process.Field<string>("Title"),
                         Description = process.Field<string>("Description"),
@@ -82,7 +82,7 @@ namespace Services.Management
                 {
                     Id = dt.Rows[0].Field<int>("Id"),
                     ProductId = dt.Rows[0].Field<int>("ProductId"),
-                    ProcessId = dt.Rows[0].Field<int>("ProductId"),
+                    ProcessId = dt.Rows[0].Field<int>("ProcessId"),
                     Position = dt.Rows[0].Field<int>("Position"),
                     Title = dt.Rows[0].Field<string>("Title"),
                     Description = dt.Rows[0].Field<string>("Description"),

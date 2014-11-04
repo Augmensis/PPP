@@ -74,7 +74,7 @@ namespace Services.Management
                         IsDeleted = process.Field<bool>("IsDeleted")
                     };
 
-                    if (tempProcess.NotesId != 0) tempProcess.Notes = Note.Fetch(tempProcess.NotesId);
+                    if (tempProcess.NotesId != 0) tempProcess.Notes = Note.FetchAllNotes(tempProcess.ProductId);
                     processList.Add(tempProcess);
                 }
                 
@@ -108,7 +108,7 @@ namespace Services.Management
                     IsDeleted = dt.Rows[0].Field<bool>("IsDeleted")
                 };
 
-                if (tempProcess.NotesId != 0) tempProcess.Notes = Note.Fetch(tempProcess.NotesId);
+                if (tempProcess.NotesId != 0) tempProcess.Notes.Add(Note.FetchOneNote(tempProcess.ProductId, tempProcess.NotesId));
                 
                 return tempProcess;
             }

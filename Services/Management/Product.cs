@@ -35,6 +35,33 @@ namespace Services.Management
             IsDeleted = false;
         }
 
+
+        public static List<Product> FetchAllProducts(bool withProcesses = false)
+        {
+            var dt = Connection.GetMySqlTable("Select top 1 * from Products where IsDeleted <> true ;", new object[] {});
+            var productList = new List<Product>();
+
+            foreach (var product in dt.AsEnumerable())
+            {
+                var prod = new Product
+                {
+                    Id = Convert.ToInt32(product["id"].ToString()),
+                    Name = product["Name"].ToString(),
+                    Description = product["Description"].ToString(),
+                    Price = Convert.ToDouble(product["Name"].ToString()),
+                    CreationDate = product["CreationDate"].ToString(),
+                    LastUpdated = product["LastUpdated"].ToString()
+                };
+                if (withProcesses) FetchProcesses(prod.Id);
+                productList.Add(prod);
+            }
+
+
+            //prod.Processes = Process(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
+
+            return productList;
+        }
+
         public static Product FetchProduct(string productName)
         {
             var dt = Connection.GetMySqlTable("Select top 1 * from Products where Name = @productName ;", new object[]{ productName });
