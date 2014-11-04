@@ -120,7 +120,7 @@ namespace Services.Management
         }
 
 
-        public bool Save(Account acc)
+        public bool Save(Process acc)
         {
             try
             {
