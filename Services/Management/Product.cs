@@ -13,16 +13,9 @@ namespace Services.Management
 {
     public class Product
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; protected set; }
-
-        [Required]
         public string Name { get; protected set; }
-
-        [Required]
         public string Description { get; protected set; }
-
-        [Required]
         public double Price { get; protected set; }
         public double EstimatedTotalLegalCost { get; protected set; }
 
@@ -45,14 +38,16 @@ namespace Services.Management
         public static Product FetchProduct(string productName)
         {
             var dt = Connection.GetMySqlTable("Select top 1 * from Products where Name = @productName ;", new object[]{ productName });
-            var prod = new Product();
+            var prod = new Product
+            {
+                Id = Convert.ToInt32(dt.Columns["Id"].ToString()), 
+                Name = dt.Columns["Name"].ToString(),
+                Description = dt.Columns["Description"].ToString(),
+                Price = Convert.ToDouble(dt.Columns["Name"].ToString()),
+                CreationDate = dt.Columns["CreationDate"].ToString(), 
+                LastUpdated = dt.Columns["LastUpdated"].ToString()
+            };
 
-            prod.Id = Convert.ToInt32(dt.Columns["Id"].ToString());
-            prod.Name = dt.Columns["Name"].ToString();
-            prod.Description = dt.Columns["Description"].ToString();
-            prod.Price = Convert.ToDouble(dt.Columns["Name"].ToString());
-            prod.CreationDate = dt.Columns["CreationDate"].ToString();
-            prod.LastUpdated = dt.Columns["LastUpdated"].ToString();
             //prod.Processes = Process(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
 
             return prod;
@@ -61,16 +56,15 @@ namespace Services.Management
         public static Product FetchProduct(int productId)
         {
             var dt = Connection.GetMySqlTable("Select top 1 * from Products where Id = @productId ;", new object[] { productId });
-            var prod = new Product();
-
-            prod.Id = Convert.ToInt32(dt.Columns["Id"].ToString());
-            prod.Name = dt.Columns["Name"].ToString();
-            prod.Description = dt.Columns["Description"].ToString();
-            prod.Price = Convert.ToDouble(dt.Columns["Name"].ToString());
-            prod.CreationDate = dt.Columns["CreationDate"].ToString();
-            prod.LastUpdated = dt.Columns["LastUpdated"].ToString();
-            //prod.Overview = Content.FetchProductOverview(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
-            //prod.Processes = Content.FetchProductProcess(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
+            var prod = new Product
+            {
+                Id = Convert.ToInt32(dt.Columns["Id"].ToString()),
+                Name = dt.Columns["Name"].ToString(),
+                Description = dt.Columns["Description"].ToString(),
+                Price = Convert.ToDouble(dt.Columns["Name"].ToString()), 
+                CreationDate = dt.Columns["CreationDate"].ToString(),
+                LastUpdated = dt.Columns["LastUpdated"].ToString()
+            };
 
             return prod;
         }

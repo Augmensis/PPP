@@ -61,18 +61,21 @@ namespace Services.Management
 
                 foreach (DataRow process in dt.AsEnumerable())
                 {
-                    var tempProcess = new Process();
-                    tempProcess.Id = process.Field<int>("Id");
-                    tempProcess.ProductId = process.Field<int>("ProductId");
-                    tempProcess.Position = process.Field<int>("Position");
-                    tempProcess.Title = process.Field<string>("Title");
-                    tempProcess.Description = process.Field<string>("Description");
-                    tempProcess.NotesId = process.Field<int>("NotesId");
-                        if (tempProcess.NotesId != 0) tempProcess.Notes = Note.Fetch(tempProcess.NotesId);
-                    tempProcess.ProcessType = (enProcessType)process.Field<int>("ProcessType");
-                    tempProcess.CreationDate = process.Field<DateTime>("CreationDate");
-                    tempProcess.LastUpdated = process.Field<DateTime>("LastUpdated");
-                    tempProcess.IsDeleted = process.Field<bool>("IsDeleted");
+                    var tempProcess = new Process
+                    {
+                        Id = process.Field<int>("Id"),
+                        ProductId = process.Field<int>("ProductId"), 
+                        Position = process.Field<int>("Position"), 
+                        Title = process.Field<string>("Title"), 
+                        Description = process.Field<string>("Description"),
+                        NotesId = process.Field<int>("NotesId"),
+                        ProcessType = (enProcessType)process.Field<int>("ProcessType"),
+                        CreationDate = process.Field<DateTime>("CreationDate"),
+                        LastUpdated = process.Field<DateTime>("LastUpdated"),
+                        IsDeleted = process.Field<bool>("IsDeleted")
+                    };
+
+                    if (tempProcess.NotesId != 0) tempProcess.Notes = Note.Fetch(tempProcess.NotesId);
                     processList.Add(tempProcess);
                 }
                 
@@ -92,19 +95,22 @@ namespace Services.Management
                 // Select * from citizenDB.Processes where ProductId = @productId and processId = @processId
                 var dt = Connection.GetMySqlTable(SQL_ProcessFetchOne, new object[] { productId, processId });
 
-                var tempProcess = new Process();
-                tempProcess.Id = dt.Rows[0].Field<int>("Id");
-                tempProcess.ProductId = dt.Rows[0].Field<int>("ProductId");
-                tempProcess.Position = dt.Rows[0].Field<int>("Position");
-                tempProcess.Title = dt.Rows[0].Field<string>("Title");
-                tempProcess.Description = dt.Rows[0].Field<string>("Description");
-                tempProcess.NotesId = dt.Rows[0].Field<int>("NotesId");
-                    if (tempProcess.NotesId != 0) tempProcess.Notes = Note.Fetch(tempProcess.NotesId);
-                tempProcess.ProcessType = (enProcessType)dt.Rows[0].Field<int>("ProcessType");
-                tempProcess.CreationDate = dt.Rows[0].Field<DateTime>("CreationDate");
-                tempProcess.LastUpdated = dt.Rows[0].Field<DateTime>("LastUpdated");
-                tempProcess.IsDeleted = dt.Rows[0].Field<bool>("IsDeleted");
+                var tempProcess = new Process
+                {
+                    Id = dt.Rows[0].Field<int>("Id"),
+                    ProductId = dt.Rows[0].Field<int>("ProductId"), 
+                    Position = dt.Rows[0].Field<int>("Position"),
+                    Title = dt.Rows[0].Field<string>("Title"), 
+                    Description = dt.Rows[0].Field<string>("Description"), 
+                    NotesId = dt.Rows[0].Field<int>("NotesId"),
+                    ProcessType = (enProcessType)dt.Rows[0].Field<int>("ProcessType"),
+                    CreationDate = dt.Rows[0].Field<DateTime>("CreationDate"),
+                    LastUpdated = dt.Rows[0].Field<DateTime>("LastUpdated"),
+                    IsDeleted = dt.Rows[0].Field<bool>("IsDeleted")
+                };
 
+                if (tempProcess.NotesId != 0) tempProcess.Notes = Note.Fetch(tempProcess.NotesId);
+                
                 return tempProcess;
             }
             catch (Exception ex)
@@ -123,7 +129,7 @@ namespace Services.Management
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Error trying to save Account changes: {0}", ex.Message));
+                throw new Exception(String.Format("Error trying to save Process changes: {0}", ex.Message));
             }
             return false;
         }
