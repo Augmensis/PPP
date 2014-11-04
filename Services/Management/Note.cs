@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -15,15 +16,15 @@ namespace Services.Management
         private const string SQL_NoteSave = "";
 
 
-        public int Id { get; protected set; }
-        public int ProductId { get; protected set; }
-        public int ProcessId { get; protected set; }
-        public int Position { get; protected set; }
-        public string Title { get; protected set; }
-        public string Description { get; protected set; }
-        public DateTime CreationDate { get; protected set; }
-        public DateTime LastUpdated { get; protected set; }
-        public bool IsDeleted { get; protected set; }
+        public int Id { get;  set; }
+        public int ProductId { get;  set; }
+        public int ProcessId { get;  set; }
+        public int Position { get;  set; }
+        public string Title { get;  set; }
+        public string Description { get;  set; }
+        public DateTime CreationDate { get;  set; }
+        public DateTime LastUpdated { get;  set; }
+        public bool IsDeleted { get;  set; }
 
 
         public Note()
@@ -32,6 +33,8 @@ namespace Services.Management
             ProductId = 0;
             ProcessId = 0;
             Position = 0;
+            Title = "";
+            Description = "";
             CreationDate = DateTime.UtcNow;
             LastUpdated = DateTime.UtcNow;
             IsDeleted = false;
@@ -42,7 +45,6 @@ namespace Services.Management
             try
             {
                 var dt = Connection.GetMySqlTable(SQL_NoteFetchAll, new object[] { productId });
-
                 var noteList = new List<Note>();
 
                 foreach (DataRow process in dt.AsEnumerable())

@@ -13,7 +13,7 @@ namespace Services.Data
 {
      public class Connection
     {
-        private static MySql.Data.MySqlClient.MySqlConnection conn;
+        private static MySqlConnection conn;
         //private const string BASE_CONNECTION = "server=86.184.190.185;uid=root;pwd=xen0m0rph187;database=citizenDB;Convert Zero Datetime=True;Allow Zero Datetime=True;";
         private const int SQL_DEFAULT_TIMEOUT = 60;
 

@@ -13,24 +13,24 @@ namespace Services.Management
 {
     public class Product
     {
-        public int Id { get; protected set; }
-        public string Name { get; protected set; }
-        public string Description { get; protected set; }
-        public double Price { get; protected set; }
-        public double EstimatedTotalLegalCost { get; protected set; }
+        public int Id { get;  set; }
+        public string Name { get;  set; }
+        public string Description { get;  set; }
+        public double Price { get;  set; }
+        public double EstimatedTotalLegalCost { get;  set; }
 
-        public string CreationDate { get; protected set; }
-        public string LastUpdated { get; protected set; }
-        public List<Process> Processes { get; protected set; }
-        public bool IsDeleted { get; protected set; }
+        public DateTime CreationDate { get;  set; }
+        public DateTime LastUpdated { get;  set; }
+        public List<Process> Processes { get;  set; }
+        public bool IsDeleted { get;  set; }
 
         public Product()
         {
             Name = "";
             Description = "";
             Price = 0.0d;
-            CreationDate = "";
-            LastUpdated = "";
+            CreationDate = DateTime.UtcNow;
+            LastUpdated = DateTime.UtcNow;
             Processes = new List<Process>();
             IsDeleted = false;
         }
@@ -49,14 +49,13 @@ namespace Services.Management
                     Name = product["Name"].ToString(),
                     Description = product["Description"].ToString(),
                     Price = Convert.ToDouble(product["Name"].ToString()),
-                    CreationDate = product["CreationDate"].ToString(),
-                    LastUpdated = product["LastUpdated"].ToString()
+                    CreationDate = Convert.ToDateTime(product["CreationDate"].ToString()),
+                    LastUpdated = Convert.ToDateTime(product["LastUpdated"].ToString())
                 };
-                if (withProcesses) FetchProcesses(prod.Id);
+                if (withProcesses) prod.Processes = Process.FetchAllProcesses(prod.Id);
                 productList.Add(prod);
             }
-
-
+            
             //prod.Processes = Process(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
 
             return productList;
@@ -71,8 +70,8 @@ namespace Services.Management
                 Name = dt.Columns["Name"].ToString(),
                 Description = dt.Columns["Description"].ToString(),
                 Price = Convert.ToDouble(dt.Columns["Name"].ToString()),
-                CreationDate = dt.Columns["CreationDate"].ToString(), 
-                LastUpdated = dt.Columns["LastUpdated"].ToString()
+                CreationDate = Convert.ToDateTime(dt.Columns["CreationDate"].ToString()), 
+                LastUpdated = Convert.ToDateTime(dt.Columns["LastUpdated"].ToString())
             };
 
             //prod.Processes = Process(Convert.ToInt32(dt.Columns["Id"].ToString()));   // Add Method to Content
@@ -89,21 +88,25 @@ namespace Services.Management
                 Name = dt.Columns["Name"].ToString(),
                 Description = dt.Columns["Description"].ToString(),
                 Price = Convert.ToDouble(dt.Columns["Name"].ToString()), 
-                CreationDate = dt.Columns["CreationDate"].ToString(),
-                LastUpdated = dt.Columns["LastUpdated"].ToString()
+                CreationDate = Convert.ToDateTime(dt.Columns["CreationDate"].ToString()),
+                LastUpdated = Convert.ToDateTime(dt.Columns["LastUpdated"].ToString())
             };
 
             return prod;
         }
 
-        public static List<Process> FetchProcesses(int productId)
-        {
-            return new List<Process>();
-        }
 
-        public static void Create(Product product)
+        public bool Save(Product acc)
         {
-            
+            try
+            {
+                Connection.ExcecuteMySql(SQL_ProductSave);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(String.Format("Error trying to save Process changes: {0}", ex.Message));
+            }
+            return false;
         }
 
         public static Process AddProcessStep(Product product)
@@ -111,10 +114,20 @@ namespace Services.Management
             return new Process();
         }
 
-        public static void Update(Product product)
+        public static bool Update(Product product)
         {
-            
+            try
+            {
+                Connection.ExcecuteMySql(SQL_ProductUpdate);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(String.Format("Error trying to save Process changes: {0}", ex.Message));
+            }
+            return false;
         }
+
+
 
     }
 }

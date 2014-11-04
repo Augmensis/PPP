@@ -22,18 +22,18 @@ namespace Services.Management
         private const string SQL_ProcessFetchAll = "Select * from citizenDB.Processes where ProductId = @productId ;";
         private const string SQL_ProcessFetchOne = "Select * from citizenDB.Processes where ProductId = @productId and processId = @processId ;";
 
-        public int Id { get; protected set; }
-        public int ProductId { get; protected set; }
-        public int Position { get; protected set; }
-        public string Title { get; protected set; }
-        public string Description { get; protected set; }
-        public int NotesId { get; protected set; }
-        public List<Note> Notes { get; protected set; }
-        public enProcessType ProcessType { get; protected set; }
+        public int Id { get;  set; }
+        public int ProductId { get;  set; }
+        public int Position { get;  set; }
+        public string Title { get;  set; }
+        public string Description { get;  set; }
+        public int NotesId { get;  set; }
+        public List<Note> Notes { get;  set; }
+        public enProcessType ProcessType { get;  set; }
 
-        public DateTime CreationDate { get; protected set; }
-        public DateTime LastUpdated { get; protected set; }
-        public bool IsDeleted { get; protected set; }
+        public DateTime CreationDate { get;  set; }
+        public DateTime LastUpdated { get;  set; }
+        public bool IsDeleted { get;  set; }
 
 
         public Process()
@@ -118,8 +118,7 @@ namespace Services.Management
             }
 
         }
-
-
+        
         public bool Save(Process acc)
         {
             try

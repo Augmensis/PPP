@@ -28,28 +28,28 @@ namespace Services.Management
 
 #region Properties
 
-        public int Id { get; protected set; }
-        public string EmailAddress { get; protected set; }
-        public string Password { get; protected set; }
-        public string ConfirmPassword { get; protected set; }
+        public int Id { get;  set; }
+        public string EmailAddress { get;  set; }
+        public string Password { get;  set; }
+        public string ConfirmPassword { get;  set; }
 
-        public string Salutation { get; protected set; }
-        public string FirstName { get; protected set; }
-        public string LastName { get; protected set; }
-        public enAccountSatus AccountStatus { get; protected set; }
-        public List<Payment> Payments { get; protected set; }
+        public string Salutation { get;  set; }
+        public string FirstName { get;  set; }
+        public string LastName { get;  set; }
+        public enAccountSatus AccountStatus { get;  set; }
+        public List<Payment> Payments { get;  set; }
 
-        public int PrimaryAddressId { get; protected set; }
-        public int SellingAddressId { get; protected set; }
-        public int BuyingAddressId { get; protected set; }
-        public Address PrimaryAddress { get; protected set; }
-        public Address SellingAddress { get; protected set; }
-        public Address BuyingAddress { get; protected set; }
-        public List<Address> ObsoleteAddresses { get; protected set; }
+        public int PrimaryAddressId { get;  set; }
+        public int SellingAddressId { get;  set; }
+        public int BuyingAddressId { get;  set; }
+        public Address PrimaryAddress { get;  set; }
+        public Address SellingAddress { get;  set; }
+        public Address BuyingAddress { get;  set; }
+        public List<Address> ObsoleteAddresses { get;  set; }
 
-        public DateTime CreatedOn { get; protected set; }
-        public DateTime LastUpdated { get; protected set; }
-        public bool IsDeleted { get; protected set; }
+        public DateTime CreatedOn { get;  set; }
+        public DateTime LastUpdated { get;  set; }
+        public bool IsDeleted { get;  set; }
 
 #endregion Properties
 
@@ -179,15 +179,5 @@ namespace Services.Management
             }
             return false;
         }
-
-        //public bool GoToPub(bool pubExists, bool beerExists)
-        //{
-        //    while (pubExists || beerExists)
-        //    {
-        //        Console.WriteLine("Might as well go to the pub");
-        //        GoToPub(pubExists, beerExists);
-        //    }
-        //    return true;
-        //}
     }
 }

@@ -25,21 +25,21 @@ namespace Services.Management
 
     public class Payment
     {
-        public int Id { get; protected set; }
-        public int AccountId { get; protected set; }
-        public List<int> ProductIds { get; protected set; }
-        public enPaymentMethod PaymentMethod { get; protected set; }
-        public double Gross { get; protected set; }
-        public double Net { get; protected set; }
-        public double Vat { get; protected set; }
-        public string TransactionCode { get; protected set; }
-        public string VoucherCode { get; protected set; }
-        public enPaymentStatus PaymentStatus { get; protected set; }
+        public int Id { get;  set; }
+        public int AccountId { get;  set; }
+        public List<int> ProductIds { get;  set; }
+        public enPaymentMethod PaymentMethod { get;  set; }
+        public double Gross { get;  set; }
+        public double Net { get;  set; }
+        public double Vat { get;  set; }
+        public string TransactionCode { get;  set; }
+        public string VoucherCode { get;  set; }
+        public enPaymentStatus PaymentStatus { get;  set; }
 
-        public DateTime CreatedOn { get; protected set; }
-        public DateTime DateCompleted { get; protected set; }
-        public DateTime LastUpdated { get; protected set; }
-        public bool IsDeleted { get; protected set; }
+        public DateTime CreatedOn { get;  set; }
+        public DateTime DateCompleted { get;  set; }
+        public DateTime LastUpdated { get;  set; }
+        public bool IsDeleted { get;  set; }
 
         public Payment()
         {

@@ -23,16 +23,16 @@ namespace Services.Management
             Obsolete = 3
         }
 
-        public int Id { get; protected set; }
-        public int AccountId { get; protected set; }
-        public string AddressLine1 { get; protected set; }
-        public string AddressLine2 { get; protected set; }
-        public string AddressLine3 { get; protected set; }
-        public string City { get; protected set; }
-        public string County { get; protected set; }
-        public string Postcode { get; protected set; }
+        public int Id { get;  set; }
+        public int AccountId { get;  set; }
+        public string AddressLine1 { get;  set; }
+        public string AddressLine2 { get;  set; }
+        public string AddressLine3 { get;  set; }
+        public string City { get;  set; }
+        public string County { get;  set; }
+        public string Postcode { get;  set; }
         
-        public enAddressType AddressType { get; protected set; }
+        public enAddressType AddressType { get;  set; }
 
         public Address()
         {
