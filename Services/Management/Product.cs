@@ -13,6 +13,9 @@ namespace Services.Management
 {
     public class Product
     {
+        private const string SQL_ProductSave = "";
+        private const string SQL_ProductUpdate = "";
+        
         public int Id { get;  set; }
         public string Name { get;  set; }
         public string Description { get;  set; }
